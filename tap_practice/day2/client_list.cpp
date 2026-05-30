@@ -1,0 +1,79 @@
+#include <iostream>
+#include <list>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <mutex>
+#include <thread>
+#include <unistd.h>
+
+void	add_client(std::list<int>& client_list, int new_client, std::mutex& mtx)
+{
+	std::lock_guard<std::mutex>	lock(mtx);
+	client_list.push_back(new_client);
+}
+
+void	remove_client(std::list<int>& client_list, int client_to_remove, std::mutex& mtx)
+{
+	std::lock_guard<std::mutex> lock(mtx);
+	client_list.remove(client_to_remove);
+}
+
+// El mutex es importante por si otra función está añadiendo clientes a la lista por ejemplo
+void	broadcast(std::list<int>& client_list, std::mutex& mtx, const std::string& msg)
+{
+	std::lock_guard<std::mutex>	lock(mtx);
+	for (int client: client_list)
+	{
+		if (send(client, msg.c_str(), msg.size(), 0) == -1)
+		std::cout << "Client '" << client << "' did not receive the msg" << std::endl;
+	}
+}
+
+// Thread function
+void	handle_client(int client_fd, std::list<int>& client_list, std::mutex& mtx)
+{
+	std::string	msg;
+
+	char buffer[256] = {};
+    recv(client_fd, buffer, 256, 0);
+    close(client_fd);
+	remove_client(client_list, client_fd, mtx);
+	msg = "Client '" + std::to_string(client_fd) + "' disconnected\n";
+	broadcast(client_list, mtx, msg);
+}
+
+int	main(void)
+{
+	std::mutex			mtx;
+	std::list<int>		client_list;
+	int					sock;
+	int					client_fd;
+	struct sockaddr_in	address;
+	const int			MAX_CLIENTS = 5;
+	std::string			new_client_message;
+
+	sock = socket(AF_INET, SOCK_STREAM, 0);
+	if (sock == -1)
+		throw std::exception();
+	
+	address.sin_family = AF_INET;
+	address.sin_addr.s_addr = INADDR_ANY;
+	address.sin_port = htons(8080);
+	if (bind(sock, (sockaddr *)&address, sizeof(address)) == -1)
+		throw std::exception();
+	if (listen(sock, MAX_CLIENTS) == -1)
+		throw std::exception();
+
+	while (true)
+	{
+		client_fd = accept(sock, nullptr, nullptr);
+		if (client_fd == -1)
+			throw std::exception();
+		add_client(client_list, client_fd, mtx);
+		std::thread client(handle_client, client_fd, std::ref(client_list), std::ref(mtx));	// std::ref es necesario al pasarle parametros a un hilo
+		client.detach();
+		new_client_message = "Client " + std::to_string(client_fd) + " joined!\n";	// Todos los clientes recibirán este mensaje
+		broadcast(client_list, mtx, new_client_message);
+	}
+	return (0);
+}
