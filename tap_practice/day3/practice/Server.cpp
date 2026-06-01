@@ -1,4 +1,5 @@
 #include "Server.hpp"
+#include <iostream>
 
 // Constructors ---------------------------------------------------------------
 Server::Server()
@@ -32,14 +33,19 @@ Server::~Server()
 // TODO
 
 // Getters
-int Server::get_sock() const
+int							Server::get_sock() const
 {
 	return (sock);
 }
 
-const std::list<Player> &Server::get_player_list() const
+const std::list<Player>&	Server::get_player_list() const
 {
 	return (player_list);
+}
+
+sockaddr_in					Server::get_address() const
+{
+	return (address);
 }
 
 // Setters --------------------------------------------------------------------
@@ -86,9 +92,9 @@ void Server::add_player(const Player &player)
 
 bool Server::remove_player(const Player &target)
 {
+	std::lock_guard<std::mutex> lock(mtx);
 	const size_t before = player_list.size();
 
-	std::lock_guard<std::mutex> lock(mtx);
 	player_list.remove(target);
 	return (player_list.size() < before);	// true if changed, false otherwise
 }

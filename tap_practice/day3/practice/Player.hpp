@@ -1,6 +1,9 @@
 #pragma once
 #include <string>
 
+#define MAX_NAME_LEN 	25
+#define MAX_MSG_LEN		256
+
 class Player
 {
 	private:
@@ -29,6 +32,5 @@ class Player
 		void	set_name(const std::string& name);
 
 		// Utils
-		// bool	private_msg(const std::string& msg, const Player& target);
-		// void	public_msg(const std::string& msg);
+        bool    Player::ask_name();
 };

@@ -3,7 +3,7 @@
 #include <netinet/in.h>
 #include <mutex>
 #include <list>
-#include <iostream>
+#include <string>
 
 #include "Player.hpp"
 
@@ -29,6 +29,7 @@ class Server
         // Getters
         int							get_sock() const;
         const std::list<Player>&	get_player_list() const;
+        sockaddr_in                 get_address() const;
 
         // Setters
         // TODO
