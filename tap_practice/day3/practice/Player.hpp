@@ -32,5 +32,5 @@ class Player
 		void	set_name(const std::string& name);
 
 		// Utils
-        bool    Player::ask_name();
+        bool    ask_name();
 };

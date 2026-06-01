@@ -38,6 +38,11 @@ int							Server::get_sock() const
 	return (sock);
 }
 
+std::list<Player>&			Server::get_player_list()
+{
+	return (player_list);
+}
+
 const std::list<Player>&	Server::get_player_list() const
 {
 	return (player_list);
@@ -78,10 +83,14 @@ bool Server::private_msg(const std::string &msg, const Player &sender, const Pla
 
 void Server::public_msg(const std::string &msg, const Player &sender)
 {
+	const std::string			full_msg = sender.get_name() + ": " + msg;
 	std::lock_guard<std::mutex> lock(mtx);
+
 	for (Player& player : player_list)
 	{
-		if (send(player.get_fd(), msg.c_str(), msg.size(), 0) == -1)
+		if (player.get_id() == sender.get_id())
+			continue;
+		if (send(player.get_fd(), full_msg.c_str(), full_msg.size(), 0) == -1)
 		{
 			std::cout << sender.get_name() << " tried to send a message to " << player.get_name() << ", but failed!";
 			throw std::exception();

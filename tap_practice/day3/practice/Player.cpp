@@ -48,7 +48,7 @@ Player::Player(unsigned int fd, const std::string& name)
 
 Player::Player(const Player& other)
 {
-        fd = other.fd;
+    fd = other.fd;
     name = other.name;
     id = other.id;
 }

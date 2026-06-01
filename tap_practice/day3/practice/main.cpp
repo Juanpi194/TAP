@@ -25,7 +25,10 @@ void	handle_msg(const std::string& msg, Player& sender, Server& server)
 			send(sender.get_fd(), "Player not in the list, try again\n", sizeof("Player not in the list, try again\n"), 0);
 	}
 	else
+	{
+		const std::string	public_msg = sender.get_name() + ": " + msg;
 		server.public_msg(msg, sender);
+	}
 }
 
 // Thread function

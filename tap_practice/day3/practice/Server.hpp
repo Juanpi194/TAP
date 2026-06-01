@@ -28,6 +28,7 @@ class Server
 
         // Getters
         int							get_sock() const;
+        std::list<Player>&			get_player_list();	// Overload
         const std::list<Player>&	get_player_list() const;
         sockaddr_in                 get_address() const;
         const std::mutex&           get_mtx() const;
