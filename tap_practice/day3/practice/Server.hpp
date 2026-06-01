@@ -30,6 +30,7 @@ class Server
         int							get_sock() const;
         const std::list<Player>&	get_player_list() const;
         sockaddr_in                 get_address() const;
+        const std::mutex&           get_mtx() const;
 
         // Setters
         // TODO

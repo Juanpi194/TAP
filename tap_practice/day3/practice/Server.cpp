@@ -48,6 +48,11 @@ sockaddr_in					Server::get_address() const
 	return (address);
 }
 
+const std::mutex&			Server::get_mtx() const
+{
+	return (mtx);
+}
+
 // Setters --------------------------------------------------------------------
 // TODO
 

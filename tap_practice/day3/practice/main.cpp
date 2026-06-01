@@ -4,47 +4,29 @@
 #include <cstring>
 #include <unistd.h>
 
-// bool private_msg(int sender_fd, std::string &msg, std::list<int> &client_list, std::mutex &mtx)
-// {
-// 	const std::string	content = msg.substr(5);
-// 	const int			pos = content.find(" ");
-// 	const int			target_fd = std::stoi(content.substr(0, pos));
-// 	const std::string	private_msg = std::to_string(sender_fd) + ": " + content.substr(pos + 1);
-// 	const std::string	client_not_found_msg = "Client " + std::to_string(target_fd) + " is not in the list";
-
-// 	for (int client_fd: client_list)
-// 	{
-// 		if (client_fd == target_fd)
-// 		{
-// 			if (send(client_fd, private_msg.c_str(), private_msg.size(), 0) == -1)
-// 				throw std::exception();
-// 			return true;
-// 		}
-// 	}
-// 	if (send(sender_fd, client_not_found_msg.c_str(), client_not_found_msg.size(), 0) == -1)
-// 		throw std::exception();
-// 	return false;
-// }
-
-// void broadcast(int sender_fd, std::list<int> &client_list, std::mutex &mtx, const std::string &msg)
-// {
-// 	std::lock_guard<std::mutex> lock(mtx);
-// 	for (int client : client_list)
-// 	{
-// 		if (sender_fd == client)
-// 			continue;
-// 		if (send(client, msg.c_str(), msg.size(), 0) == -1)
-// 			std::cout << "Client '" << client << "' did not receive the msg" << std::endl;
-// 	}
-// }
-
-// void	handle_msg(const std::string& msg, Player& player, Server& server)
-// {
-// 	if (msg.find("/msg") == 0) // Empieza por /msg
-// 		private_msg(client_fd, msg, client_list, mtx);
-// 	else
-// 		broadcast(client_fd, client_list, mtx, std::string(buffer, bytes));
-// }
+void	handle_msg(const std::string& msg, Player& sender, Server& server)
+{
+	if (msg.find("/msg") == 0) // Empieza por /msg
+	{
+		const std::string	content = msg.substr(5);
+		const int			pos = content.find(" ");
+		const std::string	target = content.substr(0, pos);	// Target player name
+		const std::string	private_msg = sender.get_name() + ": " + content.substr(pos + 1);
+		const std::string	client_not_found_msg = "Player " + target + " is not in the list";
+		const Player		*found_player = NULL;
+		for (const Player& player: server.get_player_list())
+		{
+			if (player.get_name().compare(target.c_str()) == 0)
+				found_player = &player;
+		}
+		if (found_player)
+			server.private_msg(private_msg, sender, *found_player);
+		else
+			send(sender.get_fd(), "Player not in the list, try again\n", sizeof("Player not in the list, try again\n"), 0);
+	}
+	else
+		server.public_msg(msg, sender);
+}
 
 // Thread function
 void	player_routine(Player& player, Server& server)
@@ -91,9 +73,8 @@ int main(void)
 			std::cout << "No more clients can be accepted / Unexpected error" << std::endl;
 			continue;
 		}
-		Player	p(client_fd);
-		server.add_player(p);
-		std::thread	client(player_routine, std::ref(p), std::ref(server));
+		server.add_player(Player(client_fd));
+		std::thread	client(player_routine, std::ref(server.get_player_list().back()), std::ref(server));
 		client.detach();
 	}
 	close(server.get_sock());
