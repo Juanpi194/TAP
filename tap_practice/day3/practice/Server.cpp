@@ -74,6 +74,7 @@ bool Server::private_msg(const std::string &msg, const Player &sender, const Pla
 				std::cout << sender.get_name() << " tried to send a message to " << target.get_name() << ", but failed!";
 				throw std::exception();
 			}
+			std::cout << "A private message was sent" << std::endl;
 			return (true);
 		}
 	}
@@ -96,6 +97,7 @@ void Server::public_msg(const std::string &msg, const Player &sender)
 			throw std::exception();
 		}
 	}
+	std::cout << full_msg << std::endl;
 }
 
 void Server::add_player(const Player &player)

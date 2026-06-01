@@ -38,12 +38,17 @@ void	player_routine(Player& player, Server& server)
 	ssize_t		bytes;
 	char		buffer[MAX_MSG_LEN];
 	std::string	msg;
+	std::string	welcome_message;
 
 	if (player.get_name().empty())
 	{
 		while (!player.ask_name())
 			send(fd, "Error\n", sizeof("Error\n"), 0);
 	}
+	std::cout << "Player " << player.get_name() << " joined!" << std::endl;
+	welcome_message = "Welcome, " + player.get_name() + "!\n";
+	if (send(player.get_fd(), welcome_message.c_str(), welcome_message.size(), 0) == 1)
+		throw std::exception();
 	while (true)
 	{
 		memset(buffer, 0, sizeof(buffer));
