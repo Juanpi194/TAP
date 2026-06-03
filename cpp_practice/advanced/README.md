@@ -48,5 +48,13 @@ The difference is that the static variables are related with the class, and are 
 If count = 3, p1.count will be 3 and p2.count will be 3 aswell. If the variable changes, all the instances will have its own variable changed to.
 
 
+### EXCEPTIONS
+Common exception types:
+
+	- std::exception
+	- std::invalid_argument
+	- std::runtime_error
+	- std::out_of_range 
+
 ### NOEXCEPT
-...
+Word to indicate that a function will not throw an exception
