@@ -9,6 +9,7 @@
 
 #define	DEFAULT_PORT	8080
 #define	MAX_CLIENTS		10
+#define	MAX_MSG_LEN		256
 
 class Server
 {

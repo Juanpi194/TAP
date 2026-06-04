@@ -14,6 +14,7 @@ class Quest
 
 		// Operators
 		Quest&	operator=(const Quest& other);
+		bool	operator==(const Quest& other) const;
 
 		// Getters and setters
 		const std::string&	get_description(void) const;
