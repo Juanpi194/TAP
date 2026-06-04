@@ -1,5 +1,6 @@
 #include "Server.hpp"
 
+#include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
@@ -57,3 +58,20 @@ const World&				Server::get_world(void) const
 
 // Utils
 // TODO
+Player&	Server::connect_user(const std::string& name, int client_fd)
+{
+	std::lock_guard<std::mutex>	lock(mtx);
+	for (Player& p: player_list)
+	{
+		if (p.get_name() == name)
+		{
+			if (p.is_connected())
+				throw std::runtime_error("Name already in use");
+			p.set_client_fd(client_fd);
+			p.set_connected(true);
+			return (p);
+		}
+	}
+	player_list.push_back(Player(name, client_fd));
+	return (player_list.back());
+}
