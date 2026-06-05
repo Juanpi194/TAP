@@ -22,7 +22,7 @@ static std::string	ask_name(int client_fd)
 		if (bytes == 0)
 			return ("");
 		name = std::string(buffer, bytes);
-        name.erase(name.find_last_not_of("\n\r") + 1);
+		trim_newlines(name);
 	} while (name.empty());
 	return (name);
 }
@@ -32,9 +32,13 @@ static void	player_routine(Player& player, Server& server)
 	const std::string	welcome_msg = "Welcome, ";
 	char				buffer[MAX_MSG_LEN];
 	ssize_t				bytes;
+	std::string			msg;
+	Quest				quest("Send your first message");
 
-	std::cout << "Player" << player.get_name() << " connected!" << std::endl;
-	send_msg(welcome_msg + player.get_name(), player.get_client_fd());
+	std::cout << "Player " << player.get_name() << " connected!" << std::endl;
+	player.show_player_info();
+	send_msg(welcome_msg + player.get_name() + "\n", player.get_client_fd());
+	player.add_quest(quest);
 	while (true)
 	{
 		memset(buffer, 0, MAX_MSG_LEN);
@@ -43,7 +47,10 @@ static void	player_routine(Player& player, Server& server)
 			throw std::runtime_error("Message sent by client failed");
 		if (bytes == 0)
 			break ;
-		std::cout << player.get_name() << ": " << buffer << std::endl;
+		msg = std::string(buffer, bytes);
+		trim_newlines(msg);
+		std::cout << player.get_name() << ": " << msg << std::endl;
+		player.increment_sent_messages();
 	}
 }
 
@@ -71,7 +78,7 @@ static void	user_connection(int client_fd, Server& server)
 		}
 	} while (!player);
 	player_routine(*player, server);
-	close(client_fd);
+	player->disconnect();
 	return ;
 }
 
@@ -81,6 +88,7 @@ static void main_loop(Server& server)
 	sockaddr address;		// Not used
 	socklen_t address_len;	// Not used
 
+	// TODO: Add server owner, and create a thread that manages everything
 	address_len = sizeof(address);
 	while (true)
 	{
@@ -90,14 +98,19 @@ static void main_loop(Server& server)
 		std::thread	client(user_connection, client_fd, std::ref(server));
 		client.detach();
 	}
+	server.close_connections();
+	close(server.get_socket_id());
 }
 
 int main(void)
 {
-	const std::string world_name = "Amazing world of Gumball";
+	const std::string	world_name = "Amazing world of Gumball";
+	const std::string	server_init_msg = "Server initialized! World name: ";
 	Server server(world_name);
 
-	std::cout << "Server initialized! World name: " << server.get_world().get_name() << std::endl;
+	std::cout << server_init_msg;
+	std::cout << get_colored_str(server.get_world().get_name(), Color::CYAN);
+	std::cout << std::endl;
 	main_loop(server);
 	return (0);
 }

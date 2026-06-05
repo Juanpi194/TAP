@@ -19,6 +19,7 @@ class Player
 		unsigned int		id;
 		bool				connected;
 		Room*				current_room;
+		unsigned int		n_sent_messages;
 		static unsigned int	available_id;
 	public:
 		// Constructors
@@ -37,6 +38,7 @@ class Player
 		unsigned int			get_id(void) const;
 		bool					is_connected(void) const;
 		Room*					get_current_room(void) const;
+		unsigned int			get_n_sent_messages(void) const;
 		static unsigned int		get_available_id(void);
 		void					set_client_fd(int fd);
 		void					set_connected(bool connected);
@@ -45,6 +47,10 @@ class Player
 		// Utils
 		void	add_quest(const Quest& quest);
 		void	remove_quest(const Quest& quest);
+		void	complete_quest(const std::string& quest_description);
 		void	add_item(Item *item);
 		void	remove_item(Item *item);
+		void	show_player_info(void) const;
+		void	increment_sent_messages(void);
+		void	disconnect(void);
 };

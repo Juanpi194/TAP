@@ -75,3 +75,10 @@ Player&	Server::connect_user(const std::string& name, int client_fd)
 	player_list.push_back(Player(name, client_fd));
 	return (player_list.back());
 }
+
+void	Server::close_connections(void)
+{
+	std::cout << "Closing server..." << std::endl;
+	for (Player& player: player_list)
+		player.disconnect();
+}

@@ -38,4 +38,5 @@ class Server
 		// Utils
 		// TODO: qol functions...
 		Player&	connect_user(const std::string& name, int client_fd);
+		void	close_connections(void);
 };
