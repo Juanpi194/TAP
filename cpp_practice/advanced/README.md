@@ -56,5 +56,32 @@ Common exception types:
 	- std::runtime_error
 	- std::out_of_range 
 
-### NOEXCEPT
+### KEYWORDS
+
+#### NOEXCEPT
 Word to indicate that a function will not throw an exception
+
+#### CONSTEXPR
+Evaluated in compile time, not execution time (instead of using #define, use that)
+
+#### EXPLICIT
+Use it for constructors with only one parameter, to avoid Player p = 5; (if Player received just an integer, that would work)
+
+#### FINAL
+`class`: class Enemy final -> The class cannot be inherited
+
+`method`:
+```cpp
+class NPC
+{
+    virtual void interact(Player& player);
+};
+
+class Enemy : public NPC
+{
+    void interact(Player& player) final
+	{
+		...
+	}  // This method cannot be overriden
+};
+```
