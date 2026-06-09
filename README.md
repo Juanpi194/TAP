@@ -20,3 +20,69 @@ nc 'ip' 'puerto'
 7. std::list, std::map
 8. Threads and mutex
 9. Sockets TCP
+
+
+## STRUCTURE
+
+### Server
+
++ socket
++ list of players
++ world
+
+- Connect users
+- Shutdown server
+- Start monitor routine
+
+
+### Player
+
++ Name
++ id
++ client fd
++ connected
++ current room (*)
++ list of quests
++ list of items (*)
+
+- Disconnect
+- Show info (debug)
+
+
+### Quests
+
++ Description
++ Completed
+
+
+### World
+
++ Name
++ list of rooms (*)
+
+
+### Room
+
++ Name
++ list of items (*)
++ list of npcs (*)
++ list of players (*)
+
+
+### Item (ABC) -> Weapons, Potions, ...
+
++ Name
++ Description
+
+- Use
+
+
+### NPC (ABC) -> Enemies, quest givers, ...
+
++ Name
+
+- Interact
+
+
+Abrir server. Iniciar monitor routine. Ejecutar main loop (aceptar clientes constantemente y crear/logear players a partir de ellos). Cada player será un hilo.
+El monitor mostrará logs y cositas.
