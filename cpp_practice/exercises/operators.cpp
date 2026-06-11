@@ -33,22 +33,14 @@ class Vector2D
 			return (*this);
 		}
 
-		Vector2D&	operator+(const Vector2D& other)
+		Vector2D	operator+(const Vector2D& other) const
 		{
-			// if (this == &other)
-				// return (*this);
-			x += other.x;
-			y += other.y;
-			return (*this);
+			return Vector2D(x + other.x, y + other.y);
 		}
 
-		Vector2D&	operator-(const Vector2D& other)
+		Vector2D	operator-(const Vector2D& other) const
 		{
-			// if (this == &other)
-				// return (*this);
-			x -= other.x;
-			y -= other.y;
-			return (*this);
+			return Vector2D(x - other.x, y - other.y);
 		}
 
 

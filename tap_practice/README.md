@@ -125,6 +125,8 @@ solo cerrarán la conexión si "matan" el proceso (Ctrl + C / Ctrl + D)
 2. server_example.cpp
 3. client_list.cpp
 4. client_list_chat.cpp
+5. connecting_clients.cpp
+El resto es innecesario
 
 ## TCP
 TCP garantiza que los datos llegan completos y en orden
