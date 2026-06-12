@@ -3,6 +3,7 @@
 #include <list>
 #include <unistd.h>
 #include <atomic>
+#include <cstring>
 
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -11,6 +12,8 @@
 #include <mutex>
 
 constexpr unsigned int	MAX_PLAYERS = 20;
+constexpr unsigned int	MAX_NAME_LENGTH = 15;
+constexpr unsigned int	MAX_MSG_LENGTH = 256;
 std::atomic<bool>		running = true;
 
 void	trim_str(std::string& s, bool middle = true)
@@ -268,14 +271,16 @@ class Server
 				if (p.get_name() == name)
 				{
 					if (p.is_connected())
-						throw std::runtime_error("Name already in use");
+						throw std::runtime_error("Name already in use\n");
 					p.set_client_fd(client_fd);
 					p.set_connected(true);
 					return (p);
 				}
 			}
 			player_list.push_back(Player(client_fd, name, 10));
-			return (player_list.back());
+			Player& p = player_list.back();
+			p.set_connected(true);
+			return (p);
 		}
 };
 
@@ -328,12 +333,97 @@ class ServerOwner
 		}
 };
 
+std::string	ask_name(int client_fd)
+{
+	const std::string	insert_name_msg = "Insert your name: ";
+	std::string			result;
+	ssize_t				bytes;
+	char				buffer[MAX_NAME_LENGTH];
+
+
+	if (send(client_fd, insert_name_msg.c_str(), insert_name_msg.size(), 0) == -1)
+	{
+		// std::cout << "Client " << client_fd << " unexpectedly disconnected" << std::endl;
+		// close(client_fd);
+		// return ("");
+		throw std::runtime_error("Client " + std::to_string(client_fd) + " unexpectedly disconnted");
+	}
+	bytes = recv(client_fd, buffer, MAX_NAME_LENGTH, 0);
+	if (bytes == 0)
+		return ("");
+	if (bytes == -1)
+	{
+		// std::cout << "Client " << client_fd << " unexpectedly disconnected" << std::endl;
+		// close(client_fd);
+		// return ("");
+		throw std::runtime_error("Client " + std::to_string(client_fd) + " unexpectedly disconnted");
+	}
+	result = std::string(buffer, bytes);
+	trim_str(result);
+	return (result);
+}
+
+// Ask name
+// Create player if it doesn't exist in the list
+// Add it to the list in case it doesn't exist
+// Start playing
 void	client_thread(Server& server, int client_fd)
 {
-	// Ask name
-	// Create player if it doesn't exist in the list
-	// Add it to the list in case it doesn't exist
-	// Start playing
+	const std::string	invalid_name_msg = "Name cannot be empty\n";
+	std::string			player_name;
+	std::string			welcome_msg;
+	Player				*player;
+	ssize_t				bytes;
+	char				buffer[MAX_MSG_LENGTH];
+
+	try
+    {
+        player = nullptr;
+		while (!player)
+		{
+			player_name = ask_name(client_fd);
+			if (player_name.empty())
+			{
+				if (send(client_fd, invalid_name_msg.c_str(), invalid_name_msg.size(), 0) == -1)
+					throw std::runtime_error("Client " + std::to_string(client_fd) + " unexpectedly disconnted");
+				continue;
+			}
+			try
+			{
+				player = &server.connect_user(player_name, client_fd);
+			}
+			catch (const std::runtime_error& e)
+			{
+				if (send(client_fd, e.what(), strlen(e.what()), 0) == -1)
+					throw std::runtime_error("Client " + std::to_string(client_fd) + " unexpectedly disconnted");
+			}
+		}
+		welcome_msg = "Welcome, " + player->get_name() + "\n";
+		if (send(client_fd, welcome_msg.c_str(), welcome_msg.size(), 0) == -1)
+			throw std::runtime_error("Player " + player->get_name() + " unexpectedly disconnted");
+		while (true)
+		{
+			// Player starts playing...
+			memset(buffer, 0, MAX_MSG_LENGTH);
+			bytes = recv(player->get_client_fd(), buffer, MAX_MSG_LENGTH, 0);
+			if (bytes == 0)
+			{
+				player->disconnect();
+				break;
+			}
+			if (bytes == -1)
+			{
+				player->disconnect();
+				break;
+			}
+			std::cout << player->get_name() << ": " << std::string(buffer, bytes) << std::endl;
+		}
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
+        close(client_fd);
+    }
 }
 
 void	monitor_thread(ServerOwner& owner)
@@ -350,6 +440,17 @@ void	monitor_thread(ServerOwner& owner)
 			owner.close_server();
 			if (!owner.get_server().is_on())
 				break;	// Shutdown successfull
+		}
+		if (command == "show")
+		{
+			for (const Player& player: server.get_player_list())
+			{
+				std::cout << "Player " + player.get_name() + ": ";
+				std::cout << std::to_string(player.get_client_fd());
+				std::cout << " ";
+				std::cout << player.is_connected();
+				std::cout << std::endl;
+			}
 		}
 		// TODO: Add commands
 	}
