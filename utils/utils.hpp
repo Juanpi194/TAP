@@ -3,6 +3,27 @@
 
 enum LogLevel {LOG_NONE, LOG_ERROR, LOG_WARNING, LOG_INFO, LOG_DEBUG};
 
+enum Color
+{
+	RESET = 0,
+
+	BLACK = 30,
+	RED = 31,
+	GREEN = 32,
+	YELLOW = 33,
+	BLUE = 34,
+	MAGENTA = 35,
+	CYAN = 36,
+	WHITE = 37,
+
+	BRIGHT_RED = 91,
+	BRIGHT_GREEN = 92,
+	BRIGHT_YELLOW = 93,
+	BRIGHT_BLUE = 94,
+	BRIGHT_MAGENTA = 95,
+	BRIGHT_CYAN = 96,
+	BRIGHT_WHITE = 97
+};
 
 extern LogLevel	current_level;
 
@@ -17,7 +38,7 @@ extern LogLevel	current_level;
 
 @note		All logs will be printed in the `cerr` (2).
 */
-void	log(const std::string& msg, LogLevel level = current_level);
+void		log(const std::string& msg, LogLevel level = current_level);
 
 /*
 @brief		All space characters at the beginning and at the end will be removed.
@@ -40,4 +61,16 @@ void	log(const std::string& msg, LogLevel level = current_level);
 @example	trim_str(" hello    world    ") -> s = "hello world"
 			trim_str(" hello    world    ", false) -> s = "hello    world"
 */
-void	trim_str(std::string& s, bool middle = true);
+void		trim_str(std::string& s, bool middle = true);
+
+/*
+@brief	Colors the given string with the color. 
+		`color` is `RESET` by default, which means no color will be used.
+
+@param	str		The string to be colored.
+@param	color	The color to be used. Check the `Color` enum to see
+		available colors
+
+@return	A new string with the given string colored.
+*/
+std::string	color_str(const std::string& str, Color color = Color::RESET);
