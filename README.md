@@ -16,10 +16,11 @@ nc 'ip' 'puerto'
 3. classes
 4. const, constexpr, final, noexcept, virtual
 5. enum and enum class
-6. Inheritance and polimorfism
-7. std::list, std::map
-8. Threads and mutex
-9. Sockets TCP
+6. Try except
+7. Inheritance and polimorfism
+8. std::list, std::map
+9. Threads and mutex
+10. Sockets TCP
 
 
 ## STRUCTURE
