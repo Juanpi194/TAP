@@ -32,6 +32,13 @@ enum Color
 	BRIGHT_WHITE = 97
 };
 
+/*
+@brief	This variable is set when the program is compiled.
+		If the program is compiled with the flag `DEBUG_BUILD`,
+		the value will be set to `DEBUG`, otherwise `WARNING` level
+		will be set.
+@note	Check `globals.cpp`.
+*/
 extern LogLevel	current_level;
 
 /*

@@ -23,5 +23,5 @@ class Merchant final: public NPC
 		const std::map<Item*, unsigned int>	get_items_to_sell(void) const noexcept;
 
 		// Utils
-		// TODO
+		virtual void	interact(Character& character) override;
 };
