@@ -7,27 +7,19 @@
 	bool	debug_mode = true;
 #endif
 
-class Quest
-{
-	private:
-		unsigned int	id;
-		std::string		description;
-	public:
-		// Constructors
-		Quest(unsigned int id, const std::string& description);
-		Quest(const Quest& quest);
-		~Quest(void) = default;
-
-		// Operators
-		Quest&	operator=(const Quest& other);
-
-		// Getters and setters
-		unsigned int	get_id(void) const noexcept;
-		std::string		get_description(void) const noexcept;
-
-		// Utils
-		// TODO
-};
+#include "utils.hpp"
+#include "Quest.hpp"
+#include "characters/Character.hpp"
+#include "characters/Player.hpp"
+#include "characters/Fighter.hpp"
+#include "characters/Merchant.hpp"
+#include "characters/QuestGiver.hpp"
+#include "items/Item.hpp"
+#include "items/Consumable.hpp"
+#include "server/PlayerConnection.hpp"
+#include "server/Server.hpp"
+#include "world/Room.hpp"
+#include "world/World.hpp"
 
 int	main(void)
 {

@@ -1,8 +1,9 @@
 #pragma once
 #include <map>
 
-#include "NPC.hpp"
-#include "Item.hpp"
+#include "characters/NPC.hpp"
+
+class Item;
 
 constexpr unsigned int	MAX_ITEM_PRICE = 2000;
 
@@ -23,5 +24,5 @@ class Merchant final: public NPC
 		const std::map<Item*, unsigned int>	get_items_to_sell(void) const noexcept;
 
 		// Utils
-		virtual void	interact(Character& character) override;
+		void	on_interact(Player& player) override;
 };

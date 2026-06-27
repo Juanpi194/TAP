@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Character.hpp"
+#include "characters/Character.hpp"
 
-class NPC: public Character
+class NPC: public virtual Character
 {
 	private:
 		const std::string	description;

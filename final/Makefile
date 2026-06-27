@@ -4,6 +4,10 @@ ENTRY = main.cpp
 
 SRC_FOLDER = src
 INC_FOLDER = inc
+
+CHARACTERS_FOLDER = characters
+CHARACTERS_SRC_FOLDER =
+
 FLAGS = -Wall -Wextra -Werror -I $(INC_FOLDER)
 DEBUG_FLAG = -D WOW
 CC = c++

@@ -21,6 +21,7 @@ class Room
 		const std::string			name;
 		const std::string			description;
 		NPC							*npc;
+		Item						*item;
 		std::list<Player*>			player_list;
 		std::map<Direction, Room*>	adyacent_rooms;
 	public:

@@ -1,18 +1,21 @@
 #pragma once
 
-#include "Fighter.hpp"
-#include "Merchant.hpp"
-#include "Enemy.hpp"
+#include "characters/Fighter.hpp"
+#include "Quest.hpp"
+
+class Zone;
+class Enemy;
+class Merchant;
 
 // Server stuff is managed in PlayerConnection class
 class Player final: public Fighter
 {
 	private:
-		// Zone			*location;
+		Zone				*current_location;
 		// Weapon			*weapon;
 		unsigned int		gold;
 		std::list<Enemy*>	beaten_enemies;
-
+		std::list<Quest>	quest_list;
 	public:
 		// Constructors
 		Player(const std::string& name);
@@ -23,9 +26,12 @@ class Player final: public Fighter
 		Player&	operator=(const Player& other) = delete;
 
 		// Getters and setters
+		Zone						*get_current_location(void) const noexcept;
 		unsigned int				get_gold(void) const noexcept;
 		std::list<Enemy*>&			get_beaten_enemies(void) noexcept;
 		const std::list<Enemy*>&	get_beaten_enemies(void) const noexcept;
+		std::list<Quest>&			get_quest_list(void) noexcept;
+		const std::list<Quest>&		get_quest_list(void) const noexcept;
 
 		// Utils --------------------------------------------------------------
 		// Items
@@ -38,5 +44,6 @@ class Player final: public Fighter
 		void			attack(Fighter *target) noexcept override;
 
 		// Other
-		virtual void	interact(Character& character) override;
+		void			interact_with(Character& character);
+		void			on_interact(Player& player) override;
 };

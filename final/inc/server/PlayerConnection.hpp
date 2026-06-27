@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Player.hpp"
+#include "characters/Player.hpp"
 
 class PlayerConnection final
 {

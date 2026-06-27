@@ -403,7 +403,6 @@ void	client_thread(Server& server, int client_fd)
 			throw std::runtime_error("Player " + player->get_name() + " unexpectedly disconnted");
 		while (true)
 		{
-			// Player starts playing...
 			memset(buffer, 0, MAX_MSG_LENGTH);
 			bytes = recv(player->get_client_fd(), buffer, MAX_MSG_LENGTH, 0);
 			if (bytes == 0)

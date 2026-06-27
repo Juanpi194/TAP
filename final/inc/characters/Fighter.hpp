@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Character.hpp"
+#include "characters/Character.hpp"
 
 enum Status
 {
-	NONE,
+	HEALTHY,
 	POISON,
 	BURNT,
 	FROZEN

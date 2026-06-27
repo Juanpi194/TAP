@@ -1,7 +1,7 @@
 #pragma once
 
-#include "NPC.hpp"
-#include "Fighter.hpp"
+#include "characters/NPC.hpp"
+#include "characters/Fighter.hpp"
 
 class Enemy: public NPC, public Fighter
 {
@@ -20,5 +20,5 @@ class Enemy: public NPC, public Fighter
 		unsigned int	get_gold(void) const noexcept;
 
 		// Utils
-		// TODO
+		void	on_interact(Player& player) override;
 };

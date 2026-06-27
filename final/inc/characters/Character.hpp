@@ -2,9 +2,9 @@
 #include <string>
 #include <list>
 
-#include "Item.hpp"
-
+class Item;
 class Room;
+class Player;
 
 class Character
 {
@@ -31,5 +31,5 @@ class Character
 		// Utils
 		void			obtain_item(Item *item);
 		void			drop_item(Item *item);
-		virtual void	interact(Character& character) = 0;
+		virtual void	on_interact(Player& player) = 0;
 };

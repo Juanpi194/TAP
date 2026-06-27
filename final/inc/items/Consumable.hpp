@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Item.hpp"
+#include "items/Item.hpp"
 
 class Consumable: public Item
 {
