@@ -6,9 +6,23 @@ SRC_FOLDER = src
 INC_FOLDER = inc
 
 CHARACTERS_FOLDER = characters
-CHARACTERS_SRC_FOLDER =
+CHARACTERS_SRC =
 
-FLAGS = -Wall -Wextra -Werror -I $(INC_FOLDER)
+SERVER_FOLDER = server
+SERVER_SRC = $(addprefix $(SRC_FOLDER)/$(SERVER_FOLDER)/, \
+				Server.cpp ServerOwner.cpp)
+
+UTILS_FOLDER = utils
+UTILS_SRC = $(addprefix $(SRC_FOLDER)/$(UTILS_FOLDER)/, \
+				colors.cpp globals.cpp log.cpp string_utils.cpp)
+
+WORLD_FOLDER = world
+WORLD_SRC = $(addprefix $(SRC_FOLDER)/$(WORLD_FOLDER)/, \
+				Room.cpp World.cpp)
+
+SRC = $(CHARACTERS_SRC) $(SERVER_SRC) $(UTILS_SRC) $(WORLD_SRC)
+
+FLAGS = -Wall -Wextra -Werror -Wunused-parameter -std=c++17 -I $(INC_FOLDER)
 DEBUG_FLAG = -D WOW
 CC = c++
 
@@ -45,7 +59,7 @@ $(PROGRAM_NAME): $(OBJECTS)
 all: compile
 
 compile:
-	$(CC) $(FLAGS) $(ENTRY) -o $(PROGRAM_NAME)
+	$(CC) $(FLAGS) $(ENTRY) $(SRC) -o $(PROGRAM_NAME)
 
 compile-debug:
 	$(CC) $(FLAGS) $(ENTRY) $(DEBUG_FLAG) -o $(PROGRAM_NAME)

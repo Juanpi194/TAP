@@ -5,6 +5,7 @@
 
 class Player;
 class NPC;
+class Item;
 
 enum class Direction
 {
@@ -14,7 +15,7 @@ enum class Direction
 	WEST
 };
 
-class Room
+class Room final
 {
 	private:
 		const std::string			id;
@@ -24,23 +25,41 @@ class Room
 		Item						*item;
 		std::list<Player*>			player_list;
 		std::map<Direction, Room*>	adyacent_rooms;
-	public:
-		// Constructors
-		Room(const std::string& id, const std::string& name, const std::string description, NPC *npc);
-		Room(const Room& zone) = delete;
-		virtual ~Room(void);
 
-		// Operators
+		static const std::string	PREFIX;	// Defined in Room.cpp
+		static constexpr size_t		MIN_NAME_LENGTH = 3;
+		static constexpr size_t		MIN_DESCRIPTION_LENGTH = 10;
+
+		/**
+		 * @brief	Checks that all arguments for the room initialization are valid.
+		 * @return	`true` if passes the validation process. `false` otherwise.
+		 * @note	This method should be used ONLY in the constructor.
+		 */
+		bool	validate_arguments(const std::string& id, const std::string& name, const std::string& description);
+	public:
+		// Constructors -------------------------------------------------------
+
+		Room(const std::string& id, const std::string& name, const std::string& description, NPC *npc, Item *item);
+		Room(const Room& zone) = delete;
+		~Room(void);
+
+		// Operators ----------------------------------------------------------
+
 		Room&	operator=(const Room& other) = delete;
 
-		// Getters and setters
+		// Getters and setters ------------------------------------------------
+
 		std::string					get_id(void) const noexcept;
 		std::string					get_name(void) const noexcept;
 		std::string					get_description(void) const noexcept;
 		NPC							*get_NPC(void) const noexcept;
+		Item						*get_item(void) const noexcept;
 		std::list<Player*>&			get_player_list(void) noexcept;
 		const std::list<Player*>& 	get_player_list(void) const noexcept;
+		// TODO: Add `adyacent rooms` getters and setters ...
 
-		// Utils
+		// Utils --------------------------------------------------------------
+
 		void			clear(void);
+		// void			connect_room()
 };

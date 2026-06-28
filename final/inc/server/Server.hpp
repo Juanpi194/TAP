@@ -35,6 +35,8 @@ class Server
 		void	set_owner(ServerOwner *owner) noexcept;
 
 		// Utils
+		void	start(void);
+		void	stop(void);
 		void	send_msg_to(int dst, const std::string& msg);
 		void	broadcast(const std::string& msg);
 		void	connect_player(PlayerConnection& player);

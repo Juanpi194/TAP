@@ -18,6 +18,7 @@
 #include "items/Consumable.hpp"
 #include "server/PlayerConnection.hpp"
 #include "server/Server.hpp"
+#include "server/ServerOwner.hpp"
 #include "world/Room.hpp"
 #include "world/World.hpp"
 
@@ -33,6 +34,7 @@ int	main(void)
 	else
 	{
 		// Server
+		ServerOwner	owner("Marcos", nullptr);
 		std::cout << "Server started" << std::endl;
 	}
 	return (0);

@@ -1,6 +1,5 @@
 #include "utils.hpp"
 
-
 void	trim_str(std::string& s, bool middle)
 {
 	std::string	result;
@@ -22,4 +21,24 @@ void	trim_str(std::string& s, bool middle)
 			result += c;
 	}
 	s = result;
+}
+
+bool	starts_with(const std::string& str, const std::string& prefix)
+{
+	if (prefix.size() > str.size())
+		return (false);
+
+	if (str.compare(0, prefix.size(), prefix) == 0)
+		return (true);
+	return (false);
+}
+
+bool	ends_with(const std::string& str, const std::string& suffix)
+{
+	if (suffix.size() > str.size())
+		return (false);
+
+	if (str.compare(str.size() - suffix.size(), suffix.size(), suffix) == 0)
+		return (true);
+	return (false);
 }
