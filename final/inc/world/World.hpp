@@ -7,6 +7,11 @@ class World
 	private:
 		const std::string	name;
 		std::list<Room*>	rooms;
+
+		static constexpr size_t	MAX_NAME_LENGTH = 18;
+		static constexpr bool	TITLE_NAME = true;
+
+		bool	validate_json(const std::string& json_path);
 	public:
 		// Constructors -------------------------------------------------------
 
