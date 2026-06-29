@@ -42,3 +42,31 @@ bool	ends_with(const std::string& str, const std::string& suffix)
 		return (true);
 	return (false);
 }
+
+bool	is_title(const std::string& str)
+{
+	bool	new_word = true;
+	bool	has_letter = false;
+
+	for (unsigned char c : str)
+	{
+		if (std::isalpha(c))
+		{
+			has_letter = true;
+			if (new_word)
+			{
+				if (!std::isupper(c))
+					return (false);
+				new_word = false;
+			}
+			else
+			{
+				if (!std::islower(c))
+					return (false);
+			}
+		}
+		else
+			new_word = true;
+	}
+	return (has_letter);
+}

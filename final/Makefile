@@ -10,7 +10,7 @@ CHARACTERS_SRC =
 
 SERVER_FOLDER = server
 SERVER_SRC = $(addprefix $(SRC_FOLDER)/$(SERVER_FOLDER)/, \
-				Server.cpp ServerOwner.cpp)
+				PlayerConnection.cpp Server.cpp ServerOwner.cpp)
 
 UTILS_FOLDER = utils
 UTILS_SRC = $(addprefix $(SRC_FOLDER)/$(UTILS_FOLDER)/, \
@@ -22,7 +22,8 @@ WORLD_SRC = $(addprefix $(SRC_FOLDER)/$(WORLD_FOLDER)/, \
 
 SRC = $(CHARACTERS_SRC) $(SERVER_SRC) $(UTILS_SRC) $(WORLD_SRC)
 
-FLAGS = -Wall -Wextra -Werror -Wunused-parameter -std=c++17 -I $(INC_FOLDER)
+FLAGS = -std=c++17 -I $(INC_FOLDER)
+COMPILATION_FLAGS = -Wall -Wextra -Werror -Wunused-parameter
 DEBUG_FLAG = -D WOW
 CC = c++
 

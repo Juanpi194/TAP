@@ -1,12 +1,19 @@
 TODO --------------
+Decide if npcs and items are initiated in World or in Room
 World.cpp
 Room clear
 Room connections
+Server.cpp
+PlayerConnection
 
 BUGS --------------
 Hola
 
 DONE --------------
 utils
-ServerOwner
-Room
+ServerOwner base
+Room base
+
+CHANGES -----------
+npcs and items in room instead of world???
+NO COMPILATION FLAGS
