@@ -5,6 +5,9 @@ Room clear
 Room connections
 Server.cpp
 PlayerConnection
+Character
+Fighter
+Player
 
 BUGS --------------
 Hola

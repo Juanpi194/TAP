@@ -44,14 +44,11 @@ int	Server::init(void)
 // Constructors ---------------------------------------------------------------
 
 Server::Server(void):
-	sock(init()),
+	sock(-1),
 	owner(nullptr),
 	world(nullptr),
-	on(true)
+	on(false)
 {
-	if (sock == -1)
-		throw ServerError("Server initialization error.");
-
 	// TODO: Give json_path so a specific World can be created
 }
 
@@ -110,6 +107,10 @@ void	Server::start(void)
 		log("Tried to start server, but it is already on.", LogLevel::WARNING);
 		return ;
 	}
+	sock = init();
+	if (sock == -1)
+		throw ServerError("Server initialization error.");
+	on = true;
 	// TODO: Use init function again.
 }
 

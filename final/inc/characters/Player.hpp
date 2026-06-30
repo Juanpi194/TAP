@@ -17,15 +17,18 @@ class Player final: public Fighter
 		std::list<Enemy*>	beaten_enemies;
 		std::list<Quest>	quest_list;
 	public:
-		// Constructors
+		// Constructors -------------------------------------------------------
+
 		Player(const std::string& name);
 		Player(const Player& player) = delete;
 		~Player(void) = default;
 
-		// Operators
+		// Operators ----------------------------------------------------------
+
 		Player&	operator=(const Player& other) = delete;
 
-		// Getters and setters
+		// Getters and setters ------------------------------------------------
+
 		Zone						*get_current_location(void) const noexcept;
 		unsigned int				get_gold(void) const noexcept;
 		std::list<Enemy*>&			get_beaten_enemies(void) noexcept;
@@ -34,6 +37,7 @@ class Player final: public Fighter
 		const std::list<Quest>&		get_quest_list(void) const noexcept;
 
 		// Utils --------------------------------------------------------------
+
 		// Items
 		void			buy_item(const Merchant& merchant, Item *item);
 

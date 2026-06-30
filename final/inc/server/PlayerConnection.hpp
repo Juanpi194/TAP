@@ -12,7 +12,8 @@ class PlayerConnection final
 		bool	connected;
 		Server	*server;
 	public:
-		// Constructors
+		// Constructors -------------------------------------------------------
+
 		PlayerConnection(const std::string& name, int client_fd, Server *server);
 		PlayerConnection(const PlayerConnection& player) = delete;
 
@@ -21,10 +22,12 @@ class PlayerConnection final
 		*/
 		~PlayerConnection(void);
 
-		// Operators
+		// Operators ----------------------------------------------------------
+
 		PlayerConnection&	operator=(const PlayerConnection& other) = delete;
 
-		// Getters and setters
+		// Getters and setters ------------------------------------------------
+
 		Player&			get_player(void) noexcept;
 		const Player&	get_player(void) const noexcept;
 		int				get_client_fd(void) const noexcept;
@@ -35,7 +38,8 @@ class PlayerConnection final
 		void	set_connected(bool connected) noexcept;
 		void	set_server(Server *server);
 
-		// Utils
+		// Utils --------------------------------------------------------------
+
 		void	connect(void);
 		void	disconnect(void);
 };
