@@ -24,7 +24,7 @@ WORLD_SRC = $(addprefix $(SRC_FOLDER)/$(WORLD_FOLDER)/, \
 
 SRC = $(CHARACTERS_SRC) $(SERVER_SRC) $(UTILS_SRC) $(WORLD_SRC)
 
-OBJS = $(SRC:.cpp=.o)
+OBJS = $(SRC:$(SRC_FOLDER)/%.cpp=$(OBJ_FOLDER)/%.o)
 
 FLAGS = -std=c++17 -I $(INC_FOLDER)
 COMPILATION_FLAGS = -Wall -Wextra -Werror -Wunused-parameter
@@ -63,22 +63,20 @@ $(PROGRAM_NAME): $(OBJECTS)
 
 all: $(OBJS) compile
 
-%.o: %.cpp
+$(OBJ_FOLDER)/%.o: $(SRC_FOLDER)/%.cpp
+	@mkdir -p $(dir $@)
 	$(CC) $(FLAGS) -c $< -o $@
-	mv $@ $(OBJ_FOLDER)
 
 compile:
-	$(CC) $(FLAGS) $(ENTRY) $(SRC) -o $(PROGRAM_NAME)
+	$(CC) $(FLAGS) $(ENTRY) $(OBJS) -o $(PROGRAM_NAME)
 
 compile-debug:
-	$(CC) $(FLAGS) $(ENTRY) $(SRC) $(DEBUG_FLAG) -o $(PROGRAM_NAME)
+	$(CC) $(FLAGS) $(ENTRY) $(OBJS) $(DEBUG_FLAG) -o $(PROGRAM_NAME)
 
 clean:
-	# TODO
-	rm $(OBJ_FOLDER)/*
+	rm $(OBJS)
 
 fclean: clean
-	# TODO
 	rm $(PROGRAM_NAME)
 
 re: clean all
