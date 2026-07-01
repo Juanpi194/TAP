@@ -56,6 +56,8 @@ class Room final
 		Item						*get_item(void) const noexcept;
 		std::list<Player*>&			get_player_list(void) noexcept;
 		const std::list<Player*>& 	get_player_list(void) const noexcept;
+
+		void	set_item(Item *item);
 		// TODO: Add `adyacent rooms` getters and setters ...
 
 		// Utils --------------------------------------------------------------

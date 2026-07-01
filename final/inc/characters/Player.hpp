@@ -3,7 +3,7 @@
 #include "characters/Fighter.hpp"
 #include "Quest.hpp"
 
-class Zone;
+class Room;
 class Enemy;
 class Merchant;
 
@@ -11,7 +11,7 @@ class Merchant;
 class Player final: public Fighter
 {
 	private:
-		Zone				*current_location;
+		Room				*current_location;
 		// Weapon			*weapon;
 		unsigned int		gold;
 		std::list<Enemy*>	beaten_enemies;
@@ -29,7 +29,7 @@ class Player final: public Fighter
 
 		// Getters and setters ------------------------------------------------
 
-		Zone						*get_current_location(void) const noexcept;
+		Room						*get_current_location(void) const noexcept;
 		unsigned int				get_gold(void) const noexcept;
 		std::list<Enemy*>&			get_beaten_enemies(void) noexcept;
 		const std::list<Enemy*>&	get_beaten_enemies(void) const noexcept;

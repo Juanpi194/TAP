@@ -18,7 +18,7 @@ class Character
 
 		Character(const std::string& name);
 		Character(const Character& character);
-		virtual ~Character(void) = default;
+		virtual ~Character(void);
 
 		// Operators ----------------------------------------------------------
 

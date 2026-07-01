@@ -25,6 +25,7 @@
 int	main(void)
 {
 	// SHORT IDEA OF HOW TO MANAGE DEBUG, flag in top of this file
+	World	world("The Amazing World Of Gumball");
 
 	if (debug_mode)
 	{

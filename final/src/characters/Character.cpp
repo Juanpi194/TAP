@@ -3,6 +3,9 @@
 #include <iostream>
 
 #include "utils.hpp"
+#include "world/Room.hpp"
+
+// Constructors ---------------------------------------------------------------
 
 Character::Character(const std::string& name):
 	name(name),
@@ -23,6 +26,13 @@ Character::Character(const Character& character):
 	log("Character '" + character.name + "' was copied", LogLevel::DEBUG);
 }
 
+Character::~Character(void)
+{
+	// TODO: Delete every item in the list, ...
+}
+
+// Operators ------------------------------------------------------------------
+
 Character&	Character::operator=(const Character& other)
 {
 	if (this == &other)
@@ -32,6 +42,8 @@ Character&	Character::operator=(const Character& other)
 	// TODO: Item list starts empty right now
 	return (*this);
 }
+
+// Getters and setters --------------------------------------------------------
 
 std::string				Character::get_name(void) const noexcept
 {
@@ -61,12 +73,24 @@ void	Character::set_name(const std::string& name)
 	this->name = name;
 }
 
+// Utils ----------------------------------------------------------------------
+
 void	Character::obtain_item(Item *item)
 {
-	// TODO
+	// TODO: Change logic
+	if (!item)
+		return ;
+	item_list.push_back(item);
+	if (current_room)
+		current_room->set_item(nullptr);
 }
 
 void	Character::drop_item(Item *item)
 {
-	// TODO
+	// TODO: Change logic
+	if (!item)
+		return ;
+	item_list.remove(item);
+	if (current_room)
+		current_room->set_item(item);
 }

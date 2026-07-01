@@ -1,13 +1,6 @@
 TODO --------------
-Decide if npcs and items are initiated in World or in Room
-World.cpp
-Room clear
-Room connections
-Server.cpp
-PlayerConnection
-Character
-Fighter
-Player
+Unique npcs
+Items (Armor, Weapon, ...)
 
 BUGS --------------
 Hola
@@ -16,7 +9,11 @@ DONE --------------
 utils
 ServerOwner base
 Room base
+Character base classes
 
 CHANGES -----------
-npcs and items in room instead of world???
+NPCS stick to their own rooms (It is the room's job to free them), but items
+will be moving through rooms and players. Player's destructors must free all items
+in their inventories, and rooms will check if there is an item in them. If there is,
+it will be freed.
 NO COMPILATION FLAGS

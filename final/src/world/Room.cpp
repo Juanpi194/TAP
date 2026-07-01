@@ -107,6 +107,13 @@ const std::list<Player*>& 	Room::get_player_list(void) const noexcept
 	return (player_list);
 }
 
+void	Room::set_item(Item *item)
+{
+	this->item = item;
+	if (!item)
+		log("Item 'nullptr' was assigned to room " + name + ".", LogLevel::INFO);
+}
+
 // Utils ----------------------------------------------------------------------
 
 void	Room::clear(void)

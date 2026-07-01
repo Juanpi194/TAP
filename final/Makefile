@@ -6,7 +6,8 @@ SRC_FOLDER = src
 INC_FOLDER = inc
 
 CHARACTERS_FOLDER = characters
-CHARACTERS_SRC =
+CHARACTERS_SRC = $(addprefix $(SRC_FOLDER)/$(CHARACTERS_FOLDER)/, \
+					Character.cpp Fighter.cpp NPC.cpp Player.cpp)
 
 SERVER_FOLDER = server
 SERVER_SRC = $(addprefix $(SRC_FOLDER)/$(SERVER_FOLDER)/, \
@@ -63,7 +64,7 @@ compile:
 	$(CC) $(FLAGS) $(ENTRY) $(SRC) -o $(PROGRAM_NAME)
 
 compile-debug:
-	$(CC) $(FLAGS) $(ENTRY) $(DEBUG_FLAG) -o $(PROGRAM_NAME)
+	$(CC) $(FLAGS) $(ENTRY) $(SRC) $(DEBUG_FLAG) -o $(PROGRAM_NAME)
 
 clean:
 	rm $(PROGRAM_NAME)

@@ -7,17 +7,21 @@ class NPC: public virtual Character
 	private:
 		const std::string	description;
 	public:
-		// Constructors
+		// Constructors -------------------------------------------------------
+
 		NPC(const std::string& name, const std::string& description);
 		NPC(const NPC& npc);
 		~NPC(void) = default;
 
-		// Operators
+		// Operators ----------------------------------------------------------
+
 		NPC&	operator=(const NPC& other) = delete;
 
-		// Getters and setters
+		// Getters and setters ------------------------------------------------
+
 		std::string	get_description(void) const noexcept;
 
-		// Utils
+		// Utils --------------------------------------------------------------
+
 		// TODO
 };

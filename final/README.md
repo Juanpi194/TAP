@@ -7,5 +7,4 @@ PARA LAS QUESTS:
 - IR COMPARANDO DESCRIPCIÓN DE LA QUEST CON CÓMO COMPLETARLA
 
 
-
-Pero entonces no debería el destructor de la habitación encargarse de eso? Tal vez mi planteamiento no era del todo bueno, y cada habitación debería encargarse del npc (crearlo y destruirlo)
+AYUDA NO PUEDO MÁS
