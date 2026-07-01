@@ -4,6 +4,7 @@ ENTRY = main.cpp
 
 SRC_FOLDER = src
 INC_FOLDER = inc
+OBJ_FOLDER = obj
 
 CHARACTERS_FOLDER = characters
 CHARACTERS_SRC = $(addprefix $(SRC_FOLDER)/$(CHARACTERS_FOLDER)/, \
@@ -22,6 +23,8 @@ WORLD_SRC = $(addprefix $(SRC_FOLDER)/$(WORLD_FOLDER)/, \
 				Room.cpp World.cpp)
 
 SRC = $(CHARACTERS_SRC) $(SERVER_SRC) $(UTILS_SRC) $(WORLD_SRC)
+
+OBJS = $(SRC:.cpp=.o)
 
 FLAGS = -std=c++17 -I $(INC_FOLDER)
 COMPILATION_FLAGS = -Wall -Wextra -Werror -Wunused-parameter
@@ -58,7 +61,11 @@ run:
 $(PROGRAM_NAME): $(OBJECTS)
 	# TODO
 
-all: compile
+all: $(OBJS) compile
+
+%.o: %.cpp
+	$(CC) $(FLAGS) -c $< -o $@
+	mv $@ $(OBJ_FOLDER)
 
 compile:
 	$(CC) $(FLAGS) $(ENTRY) $(SRC) -o $(PROGRAM_NAME)
@@ -67,10 +74,12 @@ compile-debug:
 	$(CC) $(FLAGS) $(ENTRY) $(SRC) $(DEBUG_FLAG) -o $(PROGRAM_NAME)
 
 clean:
-	rm $(PROGRAM_NAME)
-
-fclean:
 	# TODO
+	rm $(OBJ_FOLDER)/*
+
+fclean: clean
+	# TODO
+	rm $(PROGRAM_NAME)
 
 re: clean all
 
