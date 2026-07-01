@@ -8,7 +8,15 @@ OBJ_FOLDER = obj
 
 CHARACTERS_FOLDER = characters
 CHARACTERS_SRC = $(addprefix $(SRC_FOLDER)/$(CHARACTERS_FOLDER)/, \
-					Character.cpp Fighter.cpp NPC.cpp Player.cpp)
+					Character.cpp Fighter.cpp NPC.cpp Player.cpp Enemy.cpp \
+					Merchant.cpp QuestGiver.cpp)
+
+ITEMS_FOLDER = items
+ITEMS_SRC =
+
+QUESTS_FOLDER = quests
+QUESTS_SRC = $(addprefix $(SRC_FOLDER)/$(QUESTS_FOLDER)/, \
+				Quest.cpp)
 
 SERVER_FOLDER = server
 SERVER_SRC = $(addprefix $(SRC_FOLDER)/$(SERVER_FOLDER)/, \
@@ -22,13 +30,13 @@ WORLD_FOLDER = world
 WORLD_SRC = $(addprefix $(SRC_FOLDER)/$(WORLD_FOLDER)/, \
 				Room.cpp World.cpp)
 
-SRC = $(CHARACTERS_SRC) $(SERVER_SRC) $(UTILS_SRC) $(WORLD_SRC)
+SRC = $(CHARACTERS_SRC) $(ITEMS_SRC) $(QUESTS_SRC) $(SERVER_SRC) $(UTILS_SRC) $(WORLD_SRC)
 
 OBJS = $(SRC:$(SRC_FOLDER)/%.cpp=$(OBJ_FOLDER)/%.o)
 
 FLAGS = -std=c++17 -I $(INC_FOLDER)
 COMPILATION_FLAGS = -Wall -Wextra -Werror -Wunused-parameter
-DEBUG_FLAG = -D WOW
+DEBUG_FLAG = -D WOW -D DEBUG_BUILD
 CC = c++
 
 COLOR_RESET			:= \033[0m
@@ -58,19 +66,14 @@ help:
 run:
 	./$(PROGRAM_NAME)
 
-$(PROGRAM_NAME): $(OBJECTS)
-	# TODO
-
-all: $(OBJS) compile
-
 $(OBJ_FOLDER)/%.o: $(SRC_FOLDER)/%.cpp
-	@mkdir -p $(dir $@)
+	mkdir -p $(dir $@)
 	$(CC) $(FLAGS) -c $< -o $@
 
-compile:
+all: $(OBJS)
 	$(CC) $(FLAGS) $(ENTRY) $(OBJS) -o $(PROGRAM_NAME)
 
-compile-debug:
+compile-debug: $(OBJS)
 	$(CC) $(FLAGS) $(ENTRY) $(OBJS) $(DEBUG_FLAG) -o $(PROGRAM_NAME)
 
 clean:
@@ -80,6 +83,9 @@ fclean: clean
 	rm $(PROGRAM_NAME)
 
 re: clean all
+
+help:
+	# TODO
 
 
 .DEFAULT_GOAL= all

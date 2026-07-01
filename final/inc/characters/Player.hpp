@@ -1,7 +1,7 @@
 #pragma once
 
 #include "characters/Fighter.hpp"
-#include "Quest.hpp"
+#include "quests/Quest.hpp"
 
 class Room;
 class Enemy;

@@ -10,19 +10,33 @@ constexpr unsigned int	MAX_ITEM_PRICE = 2000;
 class Merchant final: public NPC
 {
 	private:
-		const std::map<Item*, unsigned int>	items_to_sell;	// Item and price
+		/**
+		 * @brief	Item list that the merchant will be selling.
+		 * 			Each item has its own prize. Const so it never
+		 * 			changes. Buying an item makes a copy of it,
+		 * 			the merchant will still have it to keep selling it.
+		 */
+		const std::map<Item*, unsigned int>	items_to_sell;
 	public:
-		// Constructors
+		// Constructors -------------------------------------------------------
+
 		Merchant(const std::string& name, const std::string& description, const std::map<Item*, unsigned int>& items_to_sell);
 		Merchant(const Merchant& merchant);
-		~Merchant(void) = default;
 
-		// Operators
+		/**
+		 * @brief	Frees all items from the dictionary.
+		 */
+		~Merchant(void);
+
+		// Operators ----------------------------------------------------------
+
 		Merchant&	operator=(const Merchant& other) = delete;
 
-		// Getters and setters
+		// Getters and setters ------------------------------------------------
+
 		const std::map<Item*, unsigned int>	get_items_to_sell(void) const noexcept;
 
-		// Utils
+		// Utils --------------------------------------------------------------
+
 		void	on_interact(Player& player) override;
 };

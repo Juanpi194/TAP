@@ -22,6 +22,7 @@ bool	Room::validate_arguments(const std::string& id, const std::string& name, co
 	trim_str(room_id);
 	if (room_id.empty())
 		return (log("Room id name cannot be empty (After prefix).", LogLevel::ERROR), false);
+	// TODO: Check if there are spaces in the ID (there shouldn't be)
 	if (room_id.size() < MIN_NAME_LENGTH)
 		return (log("Room id name is too short (MIN CHARACTERS: " + std::to_string(MIN_NAME_LENGTH) + ").", LogLevel::ERROR), false);
 

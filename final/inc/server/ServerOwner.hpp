@@ -22,7 +22,7 @@ class ServerOwner
 		 * @brief	Asks the user to insert a valid password for the server.
 		 * 			This password must follow the stated rules.
 		 * @throws	`std::runtime_error` if Ctrl+D (`EOF`) is received.
-		 * @return	The validated password.
+		 * @returns	The validated password.
 		 */
 		std::string	ask_password(void);
 	public:

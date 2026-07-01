@@ -15,7 +15,7 @@ class World
 		/**
 		 * @brief	Checks that the provided name for the world
 		 * 			follows the specified rules.
-		 * @return	`true` if validation is passed. `false` otherwise.
+		 * @returns	`true` if validation is passed. `false` otherwise.
 		 * @note	This method should ONLY be used when initializing the world.
 		 */
 		bool	validate_name(const std::string& name);
@@ -24,7 +24,7 @@ class World
 		 * @brief	Checks that the provided json with all the configuration
 		 * 			is a valid file and that the configuration has good
 		 * 			format.
-		 * @return	`true` if the json format is correct, `false` otherwise.
+		 * @returns	`true` if the json format is correct, `false` otherwise.
 		 * @note	This method should ONLY be used when initializing the world.
 		 */
 		bool	validate_json(const std::string& json_path);

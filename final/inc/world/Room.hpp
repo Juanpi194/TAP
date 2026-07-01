@@ -32,7 +32,7 @@ class Room final
 
 		/**
 		 * @brief	Checks that all arguments for the room initialization are valid.
-		 * @return	`true` if passes the validation process. `false` otherwise.
+		 * @returns	`true` if passes the validation process. `false` otherwise.
 		 * @note	This method should be used ONLY in the constructor.
 		 */
 		bool	validate_arguments(const std::string& id, const std::string& name, const std::string& description);

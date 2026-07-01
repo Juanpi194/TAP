@@ -41,7 +41,7 @@ class Server
 
 		/**
 		 * @brief	Initializes the server socket.
-		 * @return	The socket fd. -1 if any problem happened.
+		 * @returns	The socket fd. -1 if any problem happened.
 		 */
 		int	init(void);
 	public:

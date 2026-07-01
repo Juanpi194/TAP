@@ -78,7 +78,7 @@ void		trim_str(std::string& s, bool middle = true);
  * @brief	Checks whether a string starts with a given prefix.
  * @param str	The string to check.
  * @param prefix	The prefix to look for at the beginning of `str`.
- * @return	`true` if `str` begins with `prefix`, `false` otherwise.
+ * @returns	`true` if `str` begins with `prefix`, `false` otherwise.
 */
 bool		starts_with(const std::string& str, const std::string& prefix);
 
@@ -86,7 +86,7 @@ bool		starts_with(const std::string& str, const std::string& prefix);
  * @brief	Checks whether a string ends with a given suffix.
  * @param str	The string to check.
  * @param suffix	The suffix to look for at the end of `str`.
- * @return `true` if `str` ends with `suffix`, `false` otherwise.
+ * @returns `true` if `str` ends with `suffix`, `false` otherwise.
 */
 bool		ends_with(const std::string& str, const std::string& suffix);
 
@@ -94,7 +94,7 @@ bool		ends_with(const std::string& str, const std::string& suffix);
  * @brief	Checks whether a word starts with an uppercase letter and the
  * 			rest are lowercase, or not.
  * @param	str	String to be evaluated.
- * @return	`true` if is a title. `false` otherwise.
+ * @returns	`true` if is a title. `false` otherwise.
 */
 bool		is_title(const std::string& str);
 
@@ -104,6 +104,6 @@ bool		is_title(const std::string& str);
  * @param	str		The string to be colored.
  * @param	color	The color to be used. Check the `Color` enum to see
  * 					available colors.
- * @return	A new string with the given string colored.
+ * @returns	A new string with the given string colored.
 */
 std::string	color_str(const std::string& str, Color color = Color::RESET);

@@ -1,24 +1,31 @@
 #pragma once
 
 #include "characters/NPC.hpp"
-#include "Quest.hpp"
+#include "quests/Quest.hpp"
 
 class QuestGiver: public NPC
 {
 	private:
 		Quest	quest;
 	public:
-		// Constructors
+		// Constructors -------------------------------------------------------
+
 		QuestGiver(const std::string& name, const std::string& description, Quest& quest);
 		QuestGiver(const QuestGiver& quest_giver);
 		~QuestGiver(void) = default;
 
-		// Operators
+		// Operators ----------------------------------------------------------
+
 		QuestGiver&	operator=(const QuestGiver& other) = delete;
 
-		// Getters and setters
-		Quest	get_quest(void) const noexcept;	// Copy of the quest
+		// Getters and setters ------------------------------------------------
 
-		// Utils
+		/**
+		 * @returns	A copy of the quest.
+		 */
+		Quest	get_quest(void) const noexcept;
+
+		// Utils --------------------------------------------------------------
+
 		void	on_interact(Player& player) override;
 };
