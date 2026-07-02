@@ -11,6 +11,7 @@ class World
 		static constexpr size_t	MIN_NAME_LENGTH = 4;
 		static constexpr size_t	MAX_NAME_LENGTH = 40;
 		static constexpr bool	TITLE_NAME = true;
+		static constexpr size_t	MAX_ROOMS = 15;
 
 		/**
 		 * @brief	Checks that the provided name for the world
