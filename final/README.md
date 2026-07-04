@@ -15,3 +15,4 @@ __attribute_nonnull__((1, ...)) -> No permite que un parametro (el especificado)
 __COLD  -> Para funciones que se usan con poca frecuencia
 __HOT -> Para funciones que se usan con mucha frecuencia (deprecado)
 __always_inline -> Forzar el inline
+__attribute_warn_unused_result__ -> Warning por valor de retorno no usado

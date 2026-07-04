@@ -73,39 +73,49 @@ Room::~Room()
 
 // Getters and setters --------------------------------------------------------
 
-std::string	Room::get_id(void) const noexcept
+std::string							Room::get_id(void) const noexcept
 {
 	return (id);
 }
 
-std::string	Room::get_name(void) const noexcept
+std::string							Room::get_name(void) const noexcept
 {
 	return (name);
 }
 
-std::string	Room::get_description(void) const noexcept
+std::string							Room::get_description(void) const noexcept
 {
 	return (description);
 }
 
-NPC			*Room::get_NPC(void) const noexcept
+NPC									*Room::get_NPC(void) const noexcept
 {
 	return (npc);
 }
 
-Item		*Room::get_item(void) const noexcept
+Item								*Room::get_item(void) const noexcept
 {
 	return (item);
 }
 
-std::list<Player*>&			Room::get_player_list(void) noexcept
+std::list<Player*>&					Room::get_player_list(void) noexcept
 {
 	return (player_list);
 }
 
-const std::list<Player*>& 	Room::get_player_list(void) const noexcept
+const std::list<Player*>& 			Room::get_player_list(void) const noexcept
 {
 	return (player_list);
+}
+
+std::map<Direction, Room*>&			Room::get_adyacent_rooms(void) noexcept
+{
+	return (adyacent_rooms);
+}
+
+const std::map<Direction, Room*>&	Room::get_adyacent_rooms(void) const noexcept
+{
+	return (adyacent_rooms);
 }
 
 void	Room::set_item(Item *item)
@@ -113,6 +123,11 @@ void	Room::set_item(Item *item)
 	this->item = item;
 	if (!item)
 		log("Item 'nullptr' was assigned to room " + name + ".", LogLevel::INFO);
+}
+
+void	Room::set_adyacent_room(Direction direction, Room *room)
+{
+	// TODO: Check if a room exists in that direction, decide ...
 }
 
 // Utils ----------------------------------------------------------------------

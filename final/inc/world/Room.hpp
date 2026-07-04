@@ -35,7 +35,7 @@ class Room final
 		 * @returns	`true` if passes the validation process. `false` otherwise.
 		 * @note	This method should be used ONLY in the constructor.
 		 */
-		bool	validate_arguments(const std::string& id, const std::string& name, const std::string& description);
+		static bool	validate_arguments(const std::string& id, const std::string& name, const std::string& description);
 	public:
 		// Constructors -------------------------------------------------------
 
@@ -49,16 +49,18 @@ class Room final
 
 		// Getters and setters ------------------------------------------------
 
-		std::string					get_id(void) const noexcept;
-		std::string					get_name(void) const noexcept;
-		std::string					get_description(void) const noexcept;
-		NPC							*get_NPC(void) const noexcept;
-		Item						*get_item(void) const noexcept;
-		std::list<Player*>&			get_player_list(void) noexcept;
-		const std::list<Player*>& 	get_player_list(void) const noexcept;
+		std::string							get_id(void) const noexcept;
+		std::string							get_name(void) const noexcept;
+		std::string							get_description(void) const noexcept;
+		NPC									*get_NPC(void) const noexcept;
+		Item								*get_item(void) const noexcept;
+		std::list<Player*>&					get_player_list(void) noexcept;
+		const std::list<Player*>& 			get_player_list(void) const noexcept;
+		std::map<Direction, Room*>&			get_adyacent_rooms(void) noexcept;
+		const std::map<Direction, Room*>&	get_adyacent_rooms(void) const noexcept;
 
 		void	set_item(Item *item);
-		// TODO: Add `adyacent rooms` getters and setters ...
+		void	set_adyacent_room(Direction direction, Room *room);
 
 		// Utils --------------------------------------------------------------
 

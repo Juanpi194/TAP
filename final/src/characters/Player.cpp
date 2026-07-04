@@ -1,14 +1,21 @@
 #include "characters/Player.hpp"
 
+#include <iostream>
+
+#include "server/PlayerConnection.hpp"
+
 // Constructors ---------------------------------------------------------------
 
-Player::Player(const std::string& name):
+Player::Player(const std::string& name, PlayerConnection *player_connection):
 	Character(name),
 	Fighter(name, {10, 10}),
+	player_connection(player_connection),
 	current_location(nullptr),
 	gold(0)
 {
-	
+	// FIXME: Decide if a player must have a PlayerConnection attached to them or not (debug mode)
+	// if (!player_connection)
+	// 	throw std::invalid_argument("Each player must have a player connection.");
 }
 
 // Getters and setters --------------------------------------------------------
@@ -45,6 +52,16 @@ const std::list<Quest>&		Player::get_quest_list(void) const noexcept
 
 // Utils ----------------------------------------------------------------------
 
+void	Player::obtain_item(Item *item)
+{
+	// TODO: Logic...
+}
+
+void	Player::drop_item(Item *item)
+{
+	// TODO: Logic...
+}
+
 void	Player::buy_item(const Merchant& merchant, Item *item)
 {
 	// TODO: Logic...
@@ -55,9 +72,19 @@ void	Player::move(void)
 	// TODO: Change location through Zone adyacent zones, ...
 }
 
+void	Player::choose_action(void)
+{
+	// TODO: Request the player an action to perform...
+}
+
 void	Player::attack(Fighter *target) noexcept
 {
 	// TODO: Attack logic...
+}
+
+FighterType	Player::get_type(void) const noexcept
+{
+	return (FighterType::Player);
 }
 
 void	Player::interact_with(Character& character)

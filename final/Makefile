@@ -6,13 +6,18 @@ SRC_FOLDER = src
 INC_FOLDER = inc
 OBJ_FOLDER = obj
 
+BATTLE_FOLDER = battle
+BATTLE_SRC = $(addprefix $(SRC_FOLDER)/$(BATTLE_FOLDER)/, \
+				Battle.cpp)
+
 CHARACTERS_FOLDER = characters
 CHARACTERS_SRC = $(addprefix $(SRC_FOLDER)/$(CHARACTERS_FOLDER)/, \
 					Character.cpp Fighter.cpp NPC.cpp Player.cpp Enemy.cpp \
 					Merchant.cpp QuestGiver.cpp)
 
 ITEMS_FOLDER = items
-ITEMS_SRC =
+ITEMS_SRC = $(addprefix $(SRC_FOLDER)/$(ITEMS_FOLDER)/, \
+				Item.cpp)
 
 QUESTS_FOLDER = quests
 QUESTS_SRC = $(addprefix $(SRC_FOLDER)/$(QUESTS_FOLDER)/, \
@@ -34,8 +39,13 @@ SRC = $(CHARACTERS_SRC) $(ITEMS_SRC) $(QUESTS_SRC) $(SERVER_SRC) $(UTILS_SRC) $(
 
 OBJS = $(SRC:$(SRC_FOLDER)/%.cpp=$(OBJ_FOLDER)/%.o)
 
-FLAGS = -std=c++17 -I $(INC_FOLDER)
+FLAGS = $(VERSION_FLAG) -I $(INC_FOLDER)
+VERSION_FLAG = -std=c++17
 COMPILATION_FLAGS = -Wall -Wextra -Werror -Wunused-parameter
+CRAZY_FLAGS = -Wpedantic -Wshadow -Wconversion -Wsign-conversion \
+				-Wcast-align -Wold-style-cast -Woverloaded-virtual \
+				-Wnon-virtual-dtor -D_POSIX_C_SOURCE=200809L -O3 \
+				-march=native -flto
 DEBUG_FLAG = -D WOW -D DEBUG_BUILD
 CC = c++
 
@@ -83,9 +93,6 @@ fclean: clean
 	rm $(PROGRAM_NAME)
 
 re: clean all
-
-help:
-	# TODO
 
 
 .DEFAULT_GOAL= all

@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+// Constructors ---------------------------------------------------------------
+
 Fighter::Fighter(const std::string& name, t_stats stats):
 	Character(name),
 	stats(stats),
@@ -19,14 +21,31 @@ Fighter::Fighter(const Fighter& fighter):
 	this->current_room = fighter.current_room;
 }
 
-t_stats	Fighter::get_stats(void) const noexcept
+Fighter::~Fighter(void)
+{
+	// TODO: Free all items in the list
+}
+
+// Getters and setters --------------------------------------------------------
+
+t_stats					Fighter::get_stats(void) const noexcept
 {
 	return (stats);
 }
 
-Status	Fighter::get_status(void) const noexcept
+Status					Fighter::get_status(void) const noexcept
 {
 	return (status);
+}
+
+std::list<Item*>&		Fighter::get_item_list(void) noexcept
+{
+	return (item_list);
+}
+
+const std::list<Item*>&	Fighter::get_item_list(void) const noexcept
+{
+	return (item_list);
 }
 
 void	Fighter::set_status(Status status) noexcept
@@ -34,7 +53,9 @@ void	Fighter::set_status(Status status) noexcept
 	this->status = status;
 }
 
+// Utils ----------------------------------------------------------------------
+
 void	Fighter::apply_status(Status status) noexcept
 {
-	// TODO
+	// TODO: Logic...
 }

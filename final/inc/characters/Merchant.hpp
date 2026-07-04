@@ -20,6 +20,9 @@ class Merchant final: public NPC
 	public:
 		// Constructors -------------------------------------------------------
 
+		/**
+		 * @throws	`std::invalid_argument` if there is any `nullptr` in the `map`.
+		 */
 		Merchant(const std::string& name, const std::string& description, const std::map<Item*, unsigned int>& items_to_sell);
 		Merchant(const Merchant& merchant);
 
@@ -34,7 +37,7 @@ class Merchant final: public NPC
 
 		// Getters and setters ------------------------------------------------
 
-		const std::map<Item*, unsigned int>	get_items_to_sell(void) const noexcept;
+		const std::map<Item*, unsigned int>&	get_items_to_sell(void) const noexcept;
 
 		// Utils --------------------------------------------------------------
 

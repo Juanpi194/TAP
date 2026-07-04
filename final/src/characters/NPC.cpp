@@ -33,4 +33,4 @@ std::string	NPC::get_description(void) const noexcept
 
 // Utils ----------------------------------------------------------------------
 
-// TODO
+// TODO: Add utils functions

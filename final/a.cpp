@@ -8,6 +8,8 @@
 // __attribute__((__always_inline__))
 // __always_inline
 // __attribute__((__hot__))
+// __attribute__((warn_unused_result))
+// __attribute_warn_unused_result__
 void	func(char *str)
 {
 

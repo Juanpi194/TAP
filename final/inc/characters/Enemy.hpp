@@ -25,6 +25,7 @@ class Enemy: public NPC, public Fighter
 		// Utils --------------------------------------------------------------
 
 		void			on_interact(Player& player) override;
+		FighterType		get_type(void) const noexcept override;
 
 		/**
 		 * @deprecated	No default behavior for enemy, each enemy MUST

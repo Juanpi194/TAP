@@ -19,7 +19,7 @@ class World
 		 * @returns	`true` if validation is passed. `false` otherwise.
 		 * @note	This method should ONLY be used when initializing the world.
 		 */
-		bool	validate_name(const std::string& name);
+		static bool	validate_name(const std::string& name);
 
 		/**
 		 * @brief	Checks that the provided json with all the configuration
@@ -28,7 +28,7 @@ class World
 		 * @returns	`true` if the json format is correct, `false` otherwise.
 		 * @note	This method should ONLY be used when initializing the world.
 		 */
-		bool	validate_json(const std::string& json_path);
+		static bool	validate_json(const std::string& json_path);
 	public:
 		// Constructors -------------------------------------------------------
 

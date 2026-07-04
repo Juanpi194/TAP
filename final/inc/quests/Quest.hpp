@@ -29,5 +29,5 @@ class Quest
 
 		// Utils --------------------------------------------------------------
 
-		// TODO
+		// TODO: Add utils functions
 };

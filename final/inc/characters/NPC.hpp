@@ -23,5 +23,5 @@ class NPC: public virtual Character
 
 		// Utils --------------------------------------------------------------
 
-		// TODO
+		// TODO: Util functions
 };

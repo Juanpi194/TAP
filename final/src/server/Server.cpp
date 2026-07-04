@@ -126,20 +126,20 @@ void	Server::stop(void)
 
 void	Server::send_msg_to(int dst, const std::string& msg)
 {
-	// TODO
+	// TODO: Send a message to a specific destiny fd.
 }
 
 void	Server::broadcast(const std::string& msg)
 {
-	// TODO
+	// TODO: Send a message to all players.
 }
 
 void	Server::connect_player(PlayerConnection& player)
 {
-	// TODO
+	// TODO: Connect a specific player
 }
 
 void	Server::disconnect_player(PlayerConnection& player)
 {
-	// TODO
+	// TODO: Disconnect a specific player
 }

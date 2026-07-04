@@ -32,3 +32,8 @@ void	Enemy::on_interact(Player& player)
 {
 	// TODO: Logic ...
 }
+
+FighterType	Enemy::get_type(void) const noexcept
+{
+	return (FighterType::Enemy);
+}

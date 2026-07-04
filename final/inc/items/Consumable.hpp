@@ -5,19 +5,23 @@
 class Consumable: public Item
 {
 	private:
-		// TODO
+		// TODO: Add some attributes
 	public:
-		// Constructors
+		// Constructors -------------------------------------------------------
+
 		Consumable(const std::string& name, const std::string& description);
 		Consumable(const Consumable& consumable);
 		~Consumable(void) = default;
 
-		// Operators
+		// Operators ----------------------------------------------------------
+
 		Consumable&	operator=(const Consumable& other) = delete;
 
-		// Getters and setters
-		// TODO
+		// Getters and setters ------------------------------------------------
 
-		// Utils
+		// TODO: Getters and setters
+
+		// Utils --------------------------------------------------------------
+
 		void	use(void) noexcept override;
 };

@@ -1,2 +1,0 @@
-[WARN]This is a warning
-[ERROR]This is an error
