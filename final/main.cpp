@@ -22,6 +22,7 @@ bool debug_mode = true;
 #include "world/Room.hpp"
 #include "world/World.hpp"
 
+
 int main(void)
 {
 	// SHORT IDEA OF HOW TO MANAGE DEBUG, flag in top of this file

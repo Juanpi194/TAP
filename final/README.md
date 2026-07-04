@@ -8,3 +8,10 @@ PARA LAS QUESTS:
 
 
 AYUDA NO PUEDO MÁS
+
+__attribute_pure__ -> similar a const
+__attribute_const__ -> similar a const
+__attribute_nonnull__((1, ...)) -> No permite que un parametro (el especificado) sea null
+__COLD  -> Para funciones que se usan con poca frecuencia
+__HOT -> Para funciones que se usan con mucha frecuencia (deprecado)
+__always_inline -> Forzar el inline
