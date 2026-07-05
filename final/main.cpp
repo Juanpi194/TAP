@@ -7,7 +7,7 @@ bool debug_mode = false;
 bool debug_mode = true;
 #endif
 
-#include "utils.hpp"
+#include "utils/utils.hpp"
 #include "quests/Quest.hpp"
 #include "characters/Character.hpp"
 #include "characters/Player.hpp"

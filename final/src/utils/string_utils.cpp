@@ -1,4 +1,4 @@
-#include "utils.hpp"
+#include "utils/utils.hpp"
 
 void	trim_str(std::string& s, bool middle)
 {

@@ -4,7 +4,7 @@
 #include <string>
 #include <cctype>
 
-#include "utils.hpp"
+#include "utils/utils.hpp"
 #include "server/Server.hpp"
 
 // Maybe move this functions to utils?

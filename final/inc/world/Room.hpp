@@ -27,8 +27,11 @@ class Room final
 		std::map<Direction, Room*>	adyacent_rooms;
 
 		static const std::string	PREFIX;	// Defined in Room.cpp
+		static constexpr bool		TITLE_NAME = true;
 		static constexpr size_t		MIN_NAME_LENGTH = 3;
+		static constexpr size_t		MAX_NAME_LENGTH = 18;
 		static constexpr size_t		MIN_DESCRIPTION_LENGTH = 10;
+		static constexpr size_t		MAX_DESCRIPTION_LENGTH = 60;
 
 		/**
 		 * @brief	Checks that all arguments for the room initialization are valid.

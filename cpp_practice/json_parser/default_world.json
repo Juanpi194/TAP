@@ -1,0 +1,17 @@
+{
+    "name": "Amazing World",
+    "description": "A test world",
+    "stats": {
+        "hp": 100
+    },
+    "rooms": [
+        {
+            "id": "loc.tavern",
+            "name": "The Tavern"
+        },
+        {
+            "id": "loc.market",
+            "name": "The Market"
+        }
+    ]
+}

@@ -14,8 +14,8 @@ class Gear: public Item
 	public:
 		// Operators ----------------------------------------------------------
 
-		Gear(const std::string& name, const std::string& description);
-		Gear(const Gear& gear);
+		Gear(const std::string& id, const std::string& name, const std::string& description);
+		Gear(const Gear& gear) = delete;
 		~Gear(void) = default;
 
 		// Operators ----------------------------------------------------------

@@ -9,8 +9,8 @@ class Armor: public Gear
 	public:
 		// Constructors -------------------------------------------------------
 
-		Armor(const std::string& name, const std::string& description, unsigned int reduced_damage);
-		Armor(const Armor& armor);
+		Armor(const std::string& id, const std::string& name, const std::string& description, unsigned int reduced_damage);
+		Armor(const Armor& armor) = delete;
 		~Armor(void) = default;
 
 		// Operators ----------------------------------------------------------

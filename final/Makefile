@@ -20,6 +20,10 @@ ITEMS_SRC = $(addprefix $(SRC_FOLDER)/$(ITEMS_FOLDER)/, \
 				Armor.cpp Consumable.cpp Gear.cpp IronArmor.cpp IronSword.cpp \
 				Item.cpp Weapon.cpp)
 
+PARSER_FOLDER = parser
+PARSER_SRC = $(addprefix $(SRC_FOLDER)/$(PARSER_FOLDER)/, \
+				parser.cpp)
+
 QUESTS_FOLDER = quests
 QUESTS_SRC = $(addprefix $(SRC_FOLDER)/$(QUESTS_FOLDER)/, \
 				Quest.cpp)
@@ -72,7 +76,10 @@ UNDERLINE_OFF		:= \033[24m
 # DE AQUÍ PARA ABAJO ESTÁ COMO LA MIERDA
 
 help:
-	# TODO
+	# TODO: Explanation of each command
+
+install:
+	curl -o inc/libs/json.hpp https://raw.githubusercontent.com/nlohmann/json/develop/single_include/nlohmann/json.hpp
 
 run:
 	./$(PROGRAM_NAME)

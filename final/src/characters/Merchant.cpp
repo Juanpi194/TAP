@@ -6,9 +6,9 @@
 
 // Constructors ---------------------------------------------------------------
 
-Merchant::Merchant(const std::string& name, const std::string& description, const std::map<Item*, unsigned int>& items_to_sell):
+Merchant::Merchant(const std::string& id, const std::string& name, const std::string& description, const std::map<Item*, unsigned int>& items_to_sell):
 	Character(name),
-	NPC(name, description),
+	NPC(id, name, description),
 	items_to_sell(items_to_sell)
 {
 	// ? REVIEW: Is the validation correct?
@@ -17,14 +17,6 @@ Merchant::Merchant(const std::string& name, const std::string& description, cons
 		if (!item_and_price.first)
 			throw std::invalid_argument("Merchant's item list to sell cannot have any nullptr in it.");
 	}
-}
-
-Merchant::Merchant(const Merchant& merchant):
-	Character(merchant.get_name()),
-	NPC(merchant.get_name(), merchant.get_description()),
-	items_to_sell(merchant.items_to_sell)
-{
-	this->current_room = merchant.current_room;
 }
 
 Merchant::~Merchant(void)

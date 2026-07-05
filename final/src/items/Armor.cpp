@@ -2,15 +2,9 @@
 
 // Constructors ---------------------------------------------------------------
 
-Armor::Armor(const std::string& name, const std::string& description, unsigned int reduced_damage):
-	Gear(name, description),
+Armor::Armor(const std::string& id, const std::string& name, const std::string& description, unsigned int reduced_damage):
+	Gear(id, name, description),
 	reduced_damage(reduced_damage)
-{
-}
-
-Armor::Armor(const Armor& armor):
-	Gear(armor.get_name(), armor.get_description()),
-	reduced_damage(armor.reduced_damage)
 {
 }
 

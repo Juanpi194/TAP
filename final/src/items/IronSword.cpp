@@ -10,12 +10,7 @@ void	IronSword::special_use(void) noexcept
 
 // Constructors ---------------------------------------------------------------
 
-IronSword::IronSword(void):
-	Weapon(NAME, DESCRIPTION, EXTRA_DAMAGE)
-{
-}
-
-IronSword::IronSword(const IronSword& sword):
-	Weapon(sword.NAME, sword.DESCRIPTION, sword.EXTRA_DAMAGE)
+IronSword::IronSword(const std::string& id):
+	Weapon(id, NAME, DESCRIPTION, EXTRA_DAMAGE)
 {
 }

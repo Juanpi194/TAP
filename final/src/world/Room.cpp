@@ -2,9 +2,9 @@
 
 #include <iostream>
 
-#include "utils.hpp"
+#include "utils/utils.hpp"
 
-const std::string	Room::PREFIX = "loc.";
+const std::string	Room::PREFIX = "room.";
 
 bool	Room::validate_arguments(const std::string& id, const std::string& name, const std::string& description)
 {
@@ -23,6 +23,8 @@ bool	Room::validate_arguments(const std::string& id, const std::string& name, co
 	if (room_id.empty())
 		return (log("Room id name cannot be empty (After prefix).", LogLevel::ERROR), false);
 	// TODO: Check if there are spaces in the ID (there shouldn't be)
+	if (room_id.size() > MAX_NAME_LENGTH)
+		return (log("Room id name is too long (MAX CHARACTERS: " + std::to_string(MAX_NAME_LENGTH) + ").", LogLevel::ERROR), false);
 	if (room_id.size() < MIN_NAME_LENGTH)
 		return (log("Room id name is too short (MIN CHARACTERS: " + std::to_string(MIN_NAME_LENGTH) + ").", LogLevel::ERROR), false);
 
@@ -31,8 +33,10 @@ bool	Room::validate_arguments(const std::string& id, const std::string& name, co
 	trim_str(room_name);
 	if (room_name.empty())
 		return (log("Room name cannot be empty.", LogLevel::ERROR), false);
-	if (!is_title(room_name))
+	if (TITLE_NAME && !is_title(room_name))
 		return (log("Room name must be a title.", LogLevel::ERROR), false);
+	if (room_name.size() > MAX_NAME_LENGTH)
+		return (log("Room name is too long (MAX CHARACTERS: " + std::to_string(MAX_NAME_LENGTH) + ").", LogLevel::ERROR), false);
 	if (room_name.size() < MIN_NAME_LENGTH)
 		return (log("Room name is too short (MIN CHARACTERS: " + std::to_string(MIN_NAME_LENGTH) + ").", LogLevel::ERROR), false);
 
@@ -41,9 +45,11 @@ bool	Room::validate_arguments(const std::string& id, const std::string& name, co
 	trim_str(room_description);
 	if (room_description.empty())
 		return (log("Room description cannot be empty.", LogLevel::ERROR), false);
+	if (room_description.size() > MAX_DESCRIPTION_LENGTH)
+		return (log("Room description is too long (MAX CHARACTERS: " + std::to_string(MAX_DESCRIPTION_LENGTH) + ").", LogLevel::ERROR), false);
 	if (room_description.size() < MIN_DESCRIPTION_LENGTH)
 		return (log("Room description is too short (MIN CHARACTERS: " + std::to_string(MIN_DESCRIPTION_LENGTH) + ").", LogLevel::ERROR), false);
-	
+
 	// VALIDATION PASSED
 	return (true);
 }

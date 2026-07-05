@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "utils.hpp"
+#include "utils/utils.hpp"
 
 bool	World::validate_name(const std::string& name)
 {

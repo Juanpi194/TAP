@@ -23,8 +23,8 @@ class Merchant final: public NPC
 		/**
 		 * @throws	`std::invalid_argument` if there is any `nullptr` in the `map`.
 		 */
-		Merchant(const std::string& name, const std::string& description, const std::map<Item*, unsigned int>& items_to_sell);
-		Merchant(const Merchant& merchant);
+		Merchant(const std::string& id, const std::string& name, const std::string& description, const std::map<Item*, unsigned int>& items_to_sell);
+		Merchant(const Merchant& merchant) = delete;
 
 		/**
 		 * @brief	Frees all items from the dictionary.

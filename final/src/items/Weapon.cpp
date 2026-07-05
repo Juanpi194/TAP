@@ -2,15 +2,9 @@
 
 // Constructors ---------------------------------------------------------------
 
-Weapon::Weapon(const std::string& name, const std::string& description, unsigned int extra_damage):
-	Gear(name, description),
+Weapon::Weapon(const std::string& id, const std::string& name, const std::string& description, unsigned int extra_damage):
+	Gear(id, name, description),
 	extra_damage(extra_damage)
-{
-}
-
-Weapon::Weapon(const Weapon& weapon):
-	Gear(weapon.get_name(), weapon.get_description()),
-	extra_damage(weapon.extra_damage)
 {
 }
 

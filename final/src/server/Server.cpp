@@ -2,7 +2,7 @@
 
 #include <netinet/in.h>
 
-#include "utils.hpp"
+#include "utils/utils.hpp"
 
 const std::string	ServerError::DEFAULT_MSG = "Server initialization failed.";
 

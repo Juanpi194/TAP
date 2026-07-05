@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "utils.hpp"
+#include "utils/utils.hpp"
 
 void	Battle::execute_turn(void)
 {

@@ -10,12 +10,7 @@ void	IronArmor::special_use(void) noexcept
 
 // Constructors ---------------------------------------------------------------
 
-IronArmor::IronArmor(void):
-	Armor(NAME, DESCRIPTION, REDUCED_DAMAGE)
-{
-}
-
-IronArmor::IronArmor(const IronArmor& iron_armor):
-	Armor(iron_armor.NAME, iron_armor.DESCRIPTION, iron_armor.REDUCED_DAMAGE)
+IronArmor::IronArmor(const std::string& id):
+	Armor(id, NAME, DESCRIPTION, REDUCED_DAMAGE)
 {
 }

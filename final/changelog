@@ -18,6 +18,7 @@ NPCS stick to their own rooms (It is the room's job to free them), but items
 will be moving through rooms and players. Player's destructors must free all items
 in their inventories, and rooms will check if there is an item in them. If there is,
 it will be freed.
+NPCS AND ITEMS WON'T BE ABLE TO BE COPIED (because of id). ID added to rooms, npcs and items
 Item list moved from Character class to Fighter class, not every character must have an 'inventory'
 ATTRIBUTES :))))
 NO COMPILATION FLAGS UNTIL END

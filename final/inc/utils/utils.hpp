@@ -107,3 +107,5 @@ bool		is_title(const std::string& str);
  * @returns	A new string with the given string colored.
 */
 std::string	color_str(const std::string& str, Color color = Color::RESET);
+
+

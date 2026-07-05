@@ -2,19 +2,11 @@
 
 // Constructors ---------------------------------------------------------------
 
-QuestGiver::QuestGiver(const std::string& name, const std::string& description, Quest& quest):
+QuestGiver::QuestGiver(const std::string& id, const std::string& name, const std::string& description, Quest& quest):
 	Character(name),
-	NPC(name, description),
+	NPC(id, name, description),
 	quest(quest)
 {
-}
-
-QuestGiver::QuestGiver(const QuestGiver& quest_giver):
-	Character(quest_giver.get_name()),
-	NPC(quest_giver.get_name(), quest_giver.get_description()),
-	quest(quest_giver.quest)
-{
-	this->current_room = current_room;
 }
 
 // Getters and setters --------------------------------------------------------

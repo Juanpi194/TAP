@@ -2,12 +2,7 @@
 
 // Constructors ---------------------------------------------------------------
 
-Gear::Gear(const std::string& name, const std::string& description):
-	Item(name, description)
-{
-}
-
-Gear::Gear(const Gear& gear):
-	Item(gear.get_name(), gear.get_description())
+Gear::Gear(const std::string& id, const std::string& name, const std::string& description):
+	Item(id, name, description)
 {
 }

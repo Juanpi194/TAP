@@ -9,8 +9,8 @@ class Weapon: public Gear
 	public:
 		// Constructors -------------------------------------------------------
 
-		Weapon(const std::string& name, const std::string& description, unsigned int extra_damage);
-		Weapon(const Weapon& weapon);
+		Weapon(const std::string& id, const std::string& name, const std::string& description, unsigned int extra_damage);
+		Weapon(const Weapon& weapon) = delete;
 		~Weapon(void) = default;
 
 		// Operators ----------------------------------------------------------
