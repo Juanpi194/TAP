@@ -1,6 +1,6 @@
 TODO --------------
 Items (Armor, Weapon, ...)
-Attack method (Fighter) should receive a reference instead of a pointer?
+Battle
 
 BUGS --------------
 Hola
@@ -10,6 +10,7 @@ utils
 ServerOwner base
 Room base
 Character base classes
+Gear base classes
 Quest base
 
 CHANGES -----------

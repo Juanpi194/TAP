@@ -8,6 +8,7 @@ class Battle
 		Fighter&		blue;
 		Fighter&		red;
 		unsigned int	turns;
+		bool			finished;
 
 		void	execute_turn(void);
 	public:
@@ -23,8 +24,12 @@ class Battle
 
 		// Getters and setters ------------------------------------------------
 
-		Fighter&	get_blue(void) const noexcept;
-		Fighter&	get_red(void) const noexcept;
+		Fighter&		get_blue(void) noexcept;
+		const Fighter&	get_blue(void) const noexcept;
+		Fighter&		get_red(void) noexcept;
+		const Fighter&	get_red(void) const noexcept;
+		unsigned int	get_turns(void) const noexcept;
+		bool			is_finished(void) const noexcept;
 
 		// Utils --------------------------------------------------------------
 

@@ -12,12 +12,13 @@ BATTLE_SRC = $(addprefix $(SRC_FOLDER)/$(BATTLE_FOLDER)/, \
 
 CHARACTERS_FOLDER = characters
 CHARACTERS_SRC = $(addprefix $(SRC_FOLDER)/$(CHARACTERS_FOLDER)/, \
-					Character.cpp Fighter.cpp NPC.cpp Player.cpp Enemy.cpp \
-					Merchant.cpp QuestGiver.cpp)
+					Character.cpp Enemy.cpp Fighter.cpp Merchant.cpp NPC.cpp \
+					Player.cpp QuestGiver.cpp)
 
 ITEMS_FOLDER = items
 ITEMS_SRC = $(addprefix $(SRC_FOLDER)/$(ITEMS_FOLDER)/, \
-				Item.cpp)
+				Armor.cpp Consumable.cpp Gear.cpp IronArmor.cpp IronSword.cpp \
+				Item.cpp Weapon.cpp)
 
 QUESTS_FOLDER = quests
 QUESTS_SRC = $(addprefix $(SRC_FOLDER)/$(QUESTS_FOLDER)/, \

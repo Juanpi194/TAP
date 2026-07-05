@@ -111,7 +111,6 @@ void	Server::start(void)
 	if (sock == -1)
 		throw ServerError("Server initialization error.");
 	on = true;
-	// TODO: Use init function again.
 }
 
 void	Server::stop(void)

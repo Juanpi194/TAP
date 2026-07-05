@@ -12,16 +12,17 @@ class PlayerConnection;
 class Player final: public Fighter
 {
 	private:
-		PlayerConnection	*player_connection;
+		// PlayerConnection	*player_connection;
 		Room				*current_location;
-		// Weapon			*weapon;
 		unsigned int		gold;
 		std::list<Enemy*>	beaten_enemies;
 		std::list<Quest>	quest_list;
 	public:
 		// Constructors -------------------------------------------------------
 
-		Player(const std::string& name, PlayerConnection *player_connection);
+		// ! REVIEW: Is it needed to have a pointer to the player_connection?
+		// Player(const std::string& name, PlayerConnection *player_connection);
+		Player(const std::string& name);
 		Player(const Player& player) = delete;
 		~Player(void) = default;
 
@@ -31,7 +32,7 @@ class Player final: public Fighter
 
 		// Getters and setters ------------------------------------------------
 
-		PlayerConnection			*get_player_connection(void) const noexcept;
+		// PlayerConnection			*get_player_connection(void) const noexcept;
 		Room						*get_current_location(void) const noexcept;
 		unsigned int				get_gold(void) const noexcept;
 		std::list<Enemy*>&			get_beaten_enemies(void) noexcept;
@@ -54,7 +55,7 @@ class Player final: public Fighter
 		// Fight --
 
 		void			choose_action(void) override;
-		void			attack(Fighter *target) noexcept override;
+		void			attack(Fighter& target) noexcept override;
 		FighterType		get_type(void) const noexcept override;
 
 		// Other --

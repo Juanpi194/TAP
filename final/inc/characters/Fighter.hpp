@@ -1,6 +1,8 @@
 #pragma once
 
 #include "characters/Character.hpp"
+#include "items/Armor.hpp"
+#include "items/Weapon.hpp"
 
 enum Status
 {
@@ -27,6 +29,9 @@ enum class FighterType
 class Fighter: public virtual Character
 {
 	private:
+		Armor	*armor;
+		Weapon	*weapon;
+
 		static constexpr unsigned int	MIN_HP = 10;
 		static constexpr unsigned int	MAX_HP = 100;
 		static constexpr unsigned int	MIN_STRENGTH = 5;
@@ -48,17 +53,21 @@ class Fighter: public virtual Character
 
 		// Getters and setters ------------------------------------------------
 
+		Armor					*get_armor(void) const noexcept;
+		Weapon					*get_weapon(void) const noexcept;
 		t_stats					get_stats(void) const noexcept;
 		Status					get_status(void) const noexcept;
 		std::list<Item*>&		get_item_list(void) noexcept;
 		const std::list<Item*>&	get_item_list(void) const noexcept;
 
+		void	set_armor(Armor *armor) noexcept;
+		void	set_weapon(Weapon *weapon) noexcept;
 		void	set_status(Status status) noexcept;
 
 		// Utils --------------------------------------------------------------
 
 		virtual void		choose_action(void) = 0;
-		virtual void		attack(Fighter *target) noexcept = 0;
+		virtual void		attack(Fighter& target) noexcept = 0;
 		virtual FighterType	get_type() const noexcept = 0;
 		void				apply_status(Status status) noexcept;
 };

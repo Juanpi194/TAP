@@ -6,6 +6,8 @@
 
 Fighter::Fighter(const std::string& name, t_stats stats):
 	Character(name),
+	armor(nullptr),
+	weapon(nullptr),
 	stats(stats),
 	status(Status::HEALTHY)
 {
@@ -15,6 +17,8 @@ Fighter::Fighter(const std::string& name, t_stats stats):
 
 Fighter::Fighter(const Fighter& fighter):
 	Character(fighter.get_name()),
+	armor(fighter.armor),
+	weapon(fighter.weapon),
 	stats(fighter.stats),
 	status(fighter.status)
 {
@@ -23,10 +27,20 @@ Fighter::Fighter(const Fighter& fighter):
 
 Fighter::~Fighter(void)
 {
-	// TODO: Free all items in the list
+	// TODO: Free all items in the list and armor and weapon if they exist.
 }
 
 // Getters and setters --------------------------------------------------------
+
+Armor					*Fighter::get_armor(void) const noexcept
+{
+	return (armor);
+}
+
+Weapon					*Fighter::get_weapon(void) const noexcept
+{
+	return (weapon);
+}
 
 t_stats					Fighter::get_stats(void) const noexcept
 {
@@ -46,6 +60,16 @@ std::list<Item*>&		Fighter::get_item_list(void) noexcept
 const std::list<Item*>&	Fighter::get_item_list(void) const noexcept
 {
 	return (item_list);
+}
+
+void	Fighter::set_armor(Armor *armor) noexcept
+{
+	this->armor = armor;
+}
+
+void	Fighter::set_weapon(Weapon *weapon) noexcept
+{
+	this->armor = armor;
 }
 
 void	Fighter::set_status(Status status) noexcept

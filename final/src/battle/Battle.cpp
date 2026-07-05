@@ -16,7 +16,8 @@ void	Battle::execute_turn(void)
 Battle::Battle(Fighter& blue, Fighter& red):
 	blue(blue),
 	red(red),
-	turns(0)
+	turns(0),
+	finished(false)
 {
 	// ? REVIEW: Check this logic.
 	if (&blue == &red)
@@ -25,14 +26,34 @@ Battle::Battle(Fighter& blue, Fighter& red):
 
 // Getters and setters --------------------------------------------------------
 
-Fighter&	Battle::get_blue(void) const noexcept
+Fighter&		Battle::get_blue(void) noexcept
 {
 	return (blue);
 }
 
-Fighter&	Battle::get_red(void) const noexcept
+const Fighter&	Battle::get_blue(void) const noexcept
+{
+	return (blue);
+}
+
+Fighter&		Battle::get_red(void) noexcept
 {
 	return (red);
+}
+
+const Fighter&	Battle::get_red(void) const noexcept
+{
+	return (red);
+}
+
+unsigned int	Battle::get_turns(void) const noexcept
+{
+	return (turns);
+}
+
+bool			Battle::is_finished(void) const noexcept
+{
+	return (finished);
 }
 
 // Utils ----------------------------------------------------------------------

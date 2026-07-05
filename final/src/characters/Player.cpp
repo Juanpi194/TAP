@@ -6,10 +6,10 @@
 
 // Constructors ---------------------------------------------------------------
 
-Player::Player(const std::string& name, PlayerConnection *player_connection):
+Player::Player(const std::string& name):
 	Character(name),
 	Fighter(name, {10, 10}),
-	player_connection(player_connection),
+	// player_connection(player_connection),
 	current_location(nullptr),
 	gold(0)
 {
@@ -77,7 +77,7 @@ void	Player::choose_action(void)
 	// TODO: Request the player an action to perform...
 }
 
-void	Player::attack(Fighter *target) noexcept
+void	Player::attack(Fighter& target) noexcept
 {
 	// TODO: Attack logic...
 }

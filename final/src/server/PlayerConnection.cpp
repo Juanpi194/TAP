@@ -8,7 +8,7 @@
 // Constructors ---------------------------------------------------------------
 
 PlayerConnection::PlayerConnection(const std::string& name, int client_fd, Server *server):
-	player(name, this),
+	player(name),
 	client_fd(client_fd),
 	connected(true),
 	server(server)
