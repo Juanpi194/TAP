@@ -2,83 +2,95 @@
 #include <string>
 #include <cstring>
 
-class Person
+class Character
 {
 	private:
-		int			age;
 		std::string	name;
 	public:
-		// Constructors
-		Person(int age, const std::string& name)
+		Character(const std::string& name)
 		{
-			std::cout << "Person " << name << " created" << std::endl;
-			this->age = age;
 			this->name = name;
-		}
-		
-		Person(const Person& person)
-		{
-			std::cout << "Person " << person.name << " got copied" << std::endl;
-			age = person.age;
-			name = person.name;
+			std::cout << "Character " << name << " initiated" << std::endl;
 		}
 
-		~Person()
+		~Character(void)
 		{
-			std::cout << "Person " << name << " destroyed" << std::endl;
+			std::cout << "Character " << name << " destroyed" << std::endl;
+		}
+
+		std::string	get_name(void) const noexcept
+		{
+			return (name);
+		}
+
+		virtual void	fight(void) = 0;
+};
+
+class Player: public Character
+{
+	private:
+		unsigned int	hp;
+	public:
+		Player(unsigned int hp, const std::string& name):
+			Character(name),
+			hp(hp)
+		{
+			std::cout << "Player " << name << " created" << std::endl;
+		}
+		
+		Player(const Player& player):
+			Character(player.get_name()),
+			hp(player.hp)
+		{
+			std::cout << "Player " << this->get_name() << " got copied" << std::endl;
+		}
+
+		~Player(void)
+		{
+			std::cout << "Player " << this->get_name() << " destroyed" << std::endl;
 		}
 
 		// Operators
-		Person&	operator=(const Person& other)
+		// Player&	operator=(const Player& other)
+		// {
+		// 	std::cout << "Person operator= called (" << other.name << ")" << std::endl;
+		// 	if (this == &other)
+		// 		return (*this);
+		// 	this->hp = other.hp;
+		// 	this->name = other.name;
+		// 	return (*this);
+		// }
+		bool	operator==(const Player& other)
 		{
-			std::cout << "Person operator= called (" << other.name << ")" << std::endl;
-			if (this == &other)
-				return (*this);
-			this->age = other.age;
-			this->name = other.name;
-			return (*this);
-		}
-		bool	operator==(const Person& other)
-		{
-			if (this->age == other.age)
+			if (this->hp == other.hp)
 				return (true);
 			return (false);
 		}
 
 		// Getters and setters
-		int	get_age(void) const
+		unsigned int	get_hp(void) const
 		{
-			return (age);
+			return (hp);
 		}
 
-		std::string	get_name(void) const
+		void	fight(void) override
 		{
-			return (name);
+			std::cout << this->get_name() << " is fighting as a player" << std::endl;
 		}
-
 		// Utils
-		virtual void	greet() const
-		{
-			std::cout << "Hello, i am " << name << ", and i am " << age << " years old" << std::endl;
- 		}
+		// virtual void	greet() const
+		// {
+		// 	std::cout << "Hello, i am " << name << ", and i am " << hp << " years old" << std::endl;
+ 		// }
 };
-
-void	func(Person p)
-{
-	p.greet();
-}
 
 
 int	main(void)
 {
-	Person	person(21, "Rocio");
-	Person	person2(21, "Nora");
-	Person	*person_ptr = new Person(22, "Juanpi");
-	// Person	person3 = person + person2;
+	// Character	character("Rocio");
+	Player	player(10, "Juanpi");
 
-	std::cout << (person == person2) << std::endl;
-	func(person);
-	person.greet();
-	delete (person_ptr);
+	std::cout << player.get_name() << std::endl;
+	player.fight();
 	return (0);
 }
